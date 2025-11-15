@@ -1,7 +1,6 @@
 package edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Authenticator;
-import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
