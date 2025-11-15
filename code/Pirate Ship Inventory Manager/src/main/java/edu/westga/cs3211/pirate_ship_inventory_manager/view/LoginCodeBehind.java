@@ -29,12 +29,12 @@ public class LoginCodeBehind {
 
 	@FXML
 	private Label greetingLabel;
-	
+
 	@FXML
 	private Label errorLabel;
 
 	private LoginViewModel viewModel;
-	
+
 	/**
 	 * Instantiates a new greeting code behind.
 	 * 
@@ -57,20 +57,20 @@ public class LoginCodeBehind {
 
 		this.submitButton.disableProperty()
 				.bind(this.nameTextField.textProperty().isEmpty().or(this.passwordTextField.textProperty().isEmpty()));
-		
+
 		this.errorLabel.textProperty().bind(this.viewModel.errorMessageProperty());
 	}
-	
+
 	@FXML
 	void handleSubmit() {
-	    if (this.viewModel.tryLogin()) {
-	        try {
-	            Main.setRoot(Main.PIRATESHIP_INVENTORY_GUI_FXML);
-	        } catch (IOException error) {
-	            error.printStackTrace();
-	        }
-	    }
-	    this.viewModel.clearTextFields();
+		if (this.viewModel.tryLogin()) {
+			try {
+				Main.setRoot(Main.PIRATESHIP_INVENTORY_GUI_FXML);
+			} catch (IOException error) {
+				error.printStackTrace();
+			}
+		}
+		this.viewModel.clearTextFields();
 	}
 
 }

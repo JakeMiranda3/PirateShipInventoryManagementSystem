@@ -22,10 +22,12 @@ public class User {
 	private Set<Role> roles;
 
 	/**
-	 * Creates a new Person with the specified name.
+	 * Creates a new user with name and password, defaults to crewmate
 	 * 
-	 * @precondition name!=null && password != null
-	 * @postcondition getName() == name && getPassword() == password
+	 * @precondition name!=null && !name.isBlank() && password != null &&
+	 *               !password.isBlank()
+	 * @postcondition getName() == name && getPassword() == password && hasRole ==
+	 *                true
 	 * 
 	 * @param name     name of the user
 	 * @param password password of the user
