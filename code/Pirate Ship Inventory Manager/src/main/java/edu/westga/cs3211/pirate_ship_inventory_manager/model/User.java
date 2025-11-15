@@ -8,8 +8,8 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.model;
  */
 public class User {
 
-	private static final String NAME_CANNOT_BE_NULL = "name cannot be null.";
-	private static final String PASSWORD_CANNOT_BE_NULL = "password cannot be null.";
+	private static final String NAME_CANNOT_BE_NULL_OR_BLANK = "name cannot be null or blank.";
+	private static final String PASSWORD_CANNOT_BE_NULL_OR_BLANK = "password cannot be null or blank.";
 	private String name;
 	private String password;
 
@@ -23,10 +23,10 @@ public class User {
 	 * @param password password of the user
 	 */
 	public User(String name, String password) {
-		if (name == null) {
-			throw new IllegalArgumentException(NAME_CANNOT_BE_NULL);
-		} else if (password == null) {
-			throw new IllegalArgumentException(PASSWORD_CANNOT_BE_NULL);
+		if (name == null || name.isBlank()) {
+			throw new IllegalArgumentException(NAME_CANNOT_BE_NULL_OR_BLANK);
+		} else if (password == null || password.isBlank()) {
+			throw new IllegalArgumentException(PASSWORD_CANNOT_BE_NULL_OR_BLANK);
 		}
 
 		this.name = name;

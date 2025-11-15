@@ -3,7 +3,7 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.view;
 import java.io.IOException;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.Main;
-import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.GreetingViewModel;
+import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.LoginViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
  * @author CS 3211
  * @version Fall 2025
  */
-public class GreetingCodeBehind {
+public class LoginCodeBehind {
 
 	@FXML
 	private TextField nameTextField;
@@ -33,7 +33,7 @@ public class GreetingCodeBehind {
 	@FXML
 	private Label errorLabel;
 
-	private GreetingViewModel viewModel;
+	private LoginViewModel viewModel;
 	
 	/**
 	 * Instantiates a new greeting code behind.
@@ -41,8 +41,8 @@ public class GreetingCodeBehind {
 	 * @precondition none
 	 * @precondition none
 	 */
-	public GreetingCodeBehind() {
-		this.viewModel = new GreetingViewModel();
+	public LoginCodeBehind() {
+		this.viewModel = new LoginViewModel();
 	}
 
 	@FXML

@@ -1,6 +1,7 @@
 package edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Authenticator;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -11,7 +12,7 @@ import javafx.beans.property.StringProperty;
  * @version Fall 2025
  */
 
-public class GreetingViewModel {
+public class LoginViewModel {
 
 	private StringProperty nameProperty;
 	private StringProperty passwordProperty;
@@ -21,7 +22,7 @@ public class GreetingViewModel {
 	/**
 	 * Instantiates a new greeting view model.
 	 */
-	public GreetingViewModel() {
+	public LoginViewModel() {
 		this.nameProperty = new SimpleStringProperty("");
 		this.passwordProperty = new SimpleStringProperty("");
 		this.errorMessageProperty = new SimpleStringProperty("");

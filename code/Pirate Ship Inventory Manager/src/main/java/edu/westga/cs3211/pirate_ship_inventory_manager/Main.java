@@ -20,8 +20,8 @@ public class Main extends Application {
 	public static final String PIRATESHIP_INVENTORY_GUI_FXML = "view/MainPirateShipInventoryWindow.fxml";
 	public static final String MAIN_PIRATESHIP_INVENTORY_WINDOW_TITLE = "Pirate Ship Inventory Management";
 
-	private static final String WINDOW_TITLE = "Greetings";
-	private static final String GUI_FXML = "view/hello.fxml";
+	private static final String WINDOW_TITLE = "Login";
+	private static final String GUI_FXML = "view/LoginWindow.fxml";
 
 	private static Stage primaryStage;
 
