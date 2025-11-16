@@ -53,11 +53,19 @@ public class Inventory {
 
 	/**
 	 * Adds the stock to compartment.
-	 *
+	 * 
+	 * @precondition stock != null && compartment != null
 	 * @param stock       the stock
 	 * @param compartment the compartment
 	 */
 	public void addStockToCompartment(Stock stock, Compartment compartment) {
+		if (stock == null) {
+			throw new IllegalArgumentException("Stock cant be null");
+		}
+
+		if (compartment == null) {
+			throw new IllegalArgumentException("Compartment cant be null");
+		}
 		compartment.addStock(stock);
 	}
 

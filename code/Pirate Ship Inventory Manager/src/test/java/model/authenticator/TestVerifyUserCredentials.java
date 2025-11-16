@@ -12,6 +12,7 @@ class TestVerifyUserCredentials {
 	public void testAllInvalidCredentials() {
 		Authenticator authenticator = new Authenticator();
 		boolean result = authenticator.verifyUserCredentials("Username", "Password");
+		
 		assertEquals(false, result, "Checks if the user is in the credential set");
 	}
 	
@@ -19,6 +20,7 @@ class TestVerifyUserCredentials {
 	public void testInvalidUserName() {
 		Authenticator authenticator = new Authenticator();
 		boolean result = authenticator.verifyUserCredentials("", "Doe");
+		
 		assertEquals(false, result, "Checks if the user is in the credential set");
 	}
 	
@@ -26,6 +28,7 @@ class TestVerifyUserCredentials {
 	public void testInvalidUserPassword() {
 		Authenticator authenticator = new Authenticator();
 		boolean result = authenticator.verifyUserCredentials("John", "");
+		
 		assertEquals(false, result, "Checks if the user is in the credential set");
 	}
 	
@@ -34,6 +37,7 @@ class TestVerifyUserCredentials {
 	public void testValidCredentials() {
 		Authenticator authenticator = new Authenticator();
 		boolean result = authenticator.verifyUserCredentials("John", "Doe");
+		
 		assertEquals(true, result, "Checks if the user is in the credential set");
 	}
 
