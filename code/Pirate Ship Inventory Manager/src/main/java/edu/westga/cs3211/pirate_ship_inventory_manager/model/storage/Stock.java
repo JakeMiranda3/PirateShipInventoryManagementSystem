@@ -6,6 +6,12 @@ import java.util.Set;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 
+/**
+ * Defines a Stock item for the pirate ship
+ * 
+ * @author Jake Miranda
+ * @version Fall 2025
+ */
 public class Stock {
 
 	private String name;
@@ -33,7 +39,6 @@ public class Stock {
 	 *                       perishable)
 	 * @param expirationDate expiration date if stock is perishable; otherwise null
 	 */
-
 	public Stock(String name, int quantity, Condition condition, Set<SpecialQuality> qualities,
 			LocalDate expirationDate) {
 
