@@ -12,6 +12,7 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
  */
 public class Compartment {
 
+	private String compartmentName;
 	private int maxCapacity;
 	private int usedCapacity;
 	private SpecialQuality allowedQuality;
@@ -26,10 +27,15 @@ public class Compartment {
 	 *                getStoredStock.isEmpty()
 	 *
 	 *
+	 *@param compartmentName the name of the compartment
 	 * @param maxCapacity    the max capacity
 	 * @param allowedQuality the allowed quality
 	 */
-	public Compartment(int maxCapacity, SpecialQuality allowedQuality) {
+	public Compartment(String compartmentName, int maxCapacity, SpecialQuality allowedQuality) {
+		
+		if (compartmentName == null || compartmentName.isBlank()) {
+			throw new IllegalArgumentException("Compartment name can't be null or empty");
+		}
 
 		if (maxCapacity <= 0) {
 			throw new IllegalArgumentException("Max capacity must be greater than zero");
@@ -38,12 +44,22 @@ public class Compartment {
 		if (allowedQuality == null) {
 			throw new IllegalArgumentException("Allowed special quality cant be null");
 		}
-
+		
+		this.compartmentName = compartmentName;
 		this.maxCapacity = maxCapacity;
 		this.usedCapacity = 0;
 		this.allowedQuality = allowedQuality;
 		this.storedStock = new ArrayList<>();
 
+	}
+	
+	/**
+	 * Gets the compartment name.
+	 *
+	 * @return the compartment name
+	 */
+	public String getCompartmentName() {
+		return this.compartmentName;
 	}
 
 	/**

@@ -62,10 +62,10 @@ public class Inventory {
 	}
 
 	private void initializeCompartments() {
-		Compartment regularStorage = new Compartment(100, SpecialQuality.NONE);
-		Compartment flammableStorage = new Compartment(100, SpecialQuality.FLAMMABLE);
-		Compartment liquidStorage = new Compartment(100, SpecialQuality.LIQUID);
-		Compartment perishableStorage = new Compartment(100, SpecialQuality.PERISHABLE);
+		Compartment regularStorage = new Compartment("Regular Compartment", 100, SpecialQuality.NONE);
+		Compartment flammableStorage = new Compartment("Flammable Compartment", 100, SpecialQuality.FLAMMABLE);
+		Compartment liquidStorage = new Compartment("Liquid Compartment", 100, SpecialQuality.LIQUID);
+		Compartment perishableStorage = new Compartment("Perishable Compartment", 100, SpecialQuality.PERISHABLE);
 		this.addCompartment(regularStorage);
 		this.addCompartment(flammableStorage);
 		this.addCompartment(liquidStorage);
