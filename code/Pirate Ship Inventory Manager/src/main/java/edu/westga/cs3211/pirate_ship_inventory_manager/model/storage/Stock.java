@@ -24,8 +24,9 @@ public class Stock {
 	 * Creates a new stock item with name, quantity, condition, special qualities,
 	 * and an optional expiration date (required if perishable).
 	 * 
-	 * @precondition name != null && !name.isBlank() && quantity > 0 && qualities !=
-	 *               null && !(qualities.contains(SpecialQuality.PERISHABLE) &&
+	 * @precondition name != null && !name.isBlank() && quantity > 0 && condition !=
+	 *               null qualities != null &&
+	 *               !(qualities.contains(SpecialQuality.PERISHABLE) &&
 	 *               expirationDate == null)
 	 * 
 	 * @postcondition getName() == name && getQuantity() == quantity &&
@@ -48,6 +49,10 @@ public class Stock {
 
 		if (quantity <= 0) {
 			throw new IllegalArgumentException("Quantity must be greater than zero");
+		}
+
+		if (condition == null) {
+			throw new IllegalArgumentException("A condition must be set");
 		}
 
 		if (qualities == null) {
