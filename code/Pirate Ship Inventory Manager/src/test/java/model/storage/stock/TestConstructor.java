@@ -115,6 +115,7 @@ public class TestConstructor {
 		assertEquals(Condition.PERFECT, stockItem.getCondition(), "Checks the condition of the stock");
 		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
 		assertEquals(null, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
 	}
 
 	@Test
@@ -129,6 +130,8 @@ public class TestConstructor {
 		assertEquals(Condition.USABLE, stockItem.getCondition(), "Checks the condition of the stock");
 		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
 		assertEquals(null, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
+
 	}
 
 	@Test
@@ -143,6 +146,8 @@ public class TestConstructor {
 		assertEquals(Condition.UNUSABLE, stockItem.getCondition(), "Checks the condition of the stock");
 		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
 		assertEquals(null, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
+
 	}
 
 	@Test
@@ -157,6 +162,8 @@ public class TestConstructor {
 		assertEquals(Condition.UNUSABLE, stockItem.getCondition(), "Checks the condition of the stock");
 		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
 		assertEquals(null, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
+
 	}
 
 	@Test
@@ -172,6 +179,8 @@ public class TestConstructor {
 		assertEquals(Condition.UNUSABLE, stockItem.getCondition(), "Checks the condition of the stock");
 		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
 		assertEquals(null, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
+
 	}
 
 	@Test
@@ -187,6 +196,8 @@ public class TestConstructor {
 		assertEquals(Condition.UNUSABLE, stockItem.getCondition(), "Checks the condition of the stock");
 		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
 		assertEquals(date, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
+
 	}
 
 }

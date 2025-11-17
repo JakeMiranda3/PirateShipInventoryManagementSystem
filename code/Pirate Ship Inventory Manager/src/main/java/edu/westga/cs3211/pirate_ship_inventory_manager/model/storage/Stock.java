@@ -1,6 +1,7 @@
 package edu.westga.cs3211.pirate_ship_inventory_manager.model.storage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
@@ -19,6 +20,7 @@ public class Stock {
 	private Condition condition;
 	private Set<SpecialQuality> qualities;
 	private LocalDate expirationDate;
+	private LocalDateTime addedOn;
 
 	/**
 	 * Creates a new stock item with name, quantity, condition, special qualities,
@@ -72,6 +74,7 @@ public class Stock {
 		this.condition = condition;
 		this.qualities = qualities;
 		this.expirationDate = expirationDate;
+		this.addedOn = LocalDateTime.now();
 	}
 
 	/**
@@ -117,6 +120,15 @@ public class Stock {
 	 */
 	public LocalDate getExpirationDate() {
 		return this.expirationDate;
+	}
+
+	/**
+	 * Gets the date the stock was added on
+	 * 
+	 * @return the added on date
+	 */
+	public LocalDateTime getAddedOn() {
+		return this.addedOn;
 	}
 
 }

@@ -1,14 +1,21 @@
 package edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Authenticator;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.StockChange;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * The Class ViewModel.
+ * The Login ViewModel.
  * 
  * @author CS 3211
  * @version Fall 2025
@@ -75,15 +82,21 @@ public class LoginViewModel {
 	public boolean tryLogin() {
 		String username = this.nameProperty.get();
 		String password = this.passwordProperty.get();
-		
+
 		User authenticatedUser = this.authenticator.getUserIfValid(username, password);
 
 		if (authenticatedUser != null) {
 			this.errorMessageProperty.set("");
-			
+
 			Session.setCurrentuser(authenticatedUser);
 			Session.setInventory(new Inventory());
-			
+
+			User jackSparrow = new User("Jack Sparrow", "password");
+			Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
+			specialQualities.add(SpecialQuality.NONE);
+			Stock gold = new Stock("Gold", 5, Condition.PERFECT, specialQualities, null);
+			Session.getInventory().addStockChange(new StockChange(gold, jackSparrow));
+
 			return true;
 		} else {
 			this.errorMessageProperty.set("Invalid username or password");

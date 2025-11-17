@@ -51,12 +51,12 @@
          </font>
       </Label>
       <DatePicker fx:id="expirationDatePicker" layoutX="125.0" layoutY="305.0" />
-      <Label layoutX="116.0" layoutY="442.0" text="Compartments:">
+      <Label layoutX="21.0" layoutY="442.0" text="Compartments:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button layoutX="186.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleAddStockToCompartment" prefHeight="33.0" prefWidth="184.0" text="Add To Selected Compartment" />
-      <ComboBox fx:id="compartmentBox" layoutX="232.0" layoutY="442.0" prefHeight="25.0" prefWidth="231.0" />
+      <Button layoutX="161.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleAddStockToCompartment" prefHeight="33.0" prefWidth="184.0" text="Add To Selected Compartment" />
+      <ComboBox fx:id="compartmentBox" layoutX="147.0" layoutY="448.0" prefHeight="25.0" prefWidth="231.0" />
 	</children>
 </AnchorPane>

@@ -6,6 +6,7 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Compartment;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.StockChange;
 import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.AddStockViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -119,6 +120,8 @@ public class AddStockCodeBehind {
 		}
 
 		selectedCompartment.addStock(stock);
+		Session.getInventory().addStockChange(new StockChange(stock, Session.getCurrentUser()));
+
 		int index = this.compartmentBox.getItems().indexOf(selectedCompartment);
 		this.compartmentBox.getItems().set(index, selectedCompartment);
 		new Alert(Alert.AlertType.INFORMATION, "Stock added successfully!").showAndWait();

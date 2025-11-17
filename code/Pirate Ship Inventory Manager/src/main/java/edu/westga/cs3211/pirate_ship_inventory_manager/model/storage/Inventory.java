@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 
 /**
  * Defines a inventory which holds a collection of compartments for the pirate
@@ -15,6 +16,7 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 public class Inventory {
 
 	private List<Compartment> compartments;
+	private List<StockChange> stockChanges;
 
 	/**
 	 * Instantiates a new inventory.
@@ -23,6 +25,7 @@ public class Inventory {
 	 */
 	public Inventory() {
 		this.compartments = new ArrayList<>();
+		this.stockChanges = new ArrayList<>();
 		this.initializeCompartments();
 	}
 
@@ -52,6 +55,24 @@ public class Inventory {
 	}
 
 	/**
+	 * Gets the users who made changes.
+	 *
+	 * @return the users who made changes
+	 */
+	public List<User> getUsersWhoMadeChanges() {
+		List<User> result = new ArrayList<>();
+
+		for (StockChange stockChange : this.stockChanges) {
+			User user = stockChange.getUser();
+			if (!result.contains(user)) {
+				result.add(user);
+			}
+		}
+
+		return result;
+	}
+
+	/**
 	 * Adds the stock to compartment.
 	 * 
 	 * @precondition stock != null && compartment != null
@@ -66,7 +87,31 @@ public class Inventory {
 		if (compartment == null) {
 			throw new IllegalArgumentException("Compartment cant be null");
 		}
+
 		compartment.addStock(stock);
+	}
+
+	/**
+	 * Adds the stock change.
+	 * 
+	 * @precondition changeInStock != null
+	 *
+	 * @param changeInStock the change in stock
+	 */
+	public void addStockChange(StockChange changeInStock) {
+		if (changeInStock == null) {
+			throw new IllegalArgumentException("StockChange cannot be null");
+		}
+		this.stockChanges.add(0, changeInStock);
+	}
+
+	/**
+	 * Gets the stock changes.
+	 *
+	 * @return the stock changes
+	 */
+	public List<StockChange> getStockChanges() {
+		return this.stockChanges;
 	}
 
 	private void initializeCompartments() {
