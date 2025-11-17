@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
- * The Class CodeBehind.
+ * The Login CodeBehind.
  * 
  * @author CS 3211
  * @version Fall 2025

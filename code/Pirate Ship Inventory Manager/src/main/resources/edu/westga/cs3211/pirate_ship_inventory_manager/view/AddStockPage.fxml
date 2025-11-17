@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.pirate_ship_inventory_manager.view.AddStockCodeBehind ">
-   <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="143.0" text="Add New Stock">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.pirate_ship_inventory_manager.view.AddStockCodeBehind">
+	<children>
+		<Label layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="143.0" text="Add New Stock">
+			<font>
+				<Font size="18.0" />
+			</font>
+		</Label>
+		<Button layoutX="520.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="35.0" prefWidth="66.0" text="Home" />
+      <Label layoutX="19.0" layoutY="106.0" prefHeight="29.0" prefWidth="56.0" text="Name:">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Label>
-   </children>
+      <TextField fx:id="nameField" layoutX="75.0" layoutY="108.0" promptText="Enter stock name..." />
+      <Label layoutX="14.0" layoutY="146.0" prefHeight="29.0" prefWidth="66.0" text="Quantity:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Spinner fx:id="quantitySpinner" editable="true" layoutX="83.0" layoutY="148.0" />
+      <Label layoutX="8.0" layoutY="185.0" prefHeight="29.0" prefWidth="85.0" text="Condition:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="conditionBox" layoutX="96.0" layoutY="187.0" prefWidth="150.0" />
+      <Label layoutX="8.0" layoutY="233.0" prefHeight="29.0" prefWidth="108.0" text="Special Quality:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="noneCheck" layoutX="135.0" layoutY="239.0" mnemonicParsing="false" text="None" />
+      <CheckBox fx:id="flammableCheck" layoutX="224.0" layoutY="239.0" mnemonicParsing="false" text="Flammable" />
+      <CheckBox fx:id="liquidCheck" layoutX="134.0" layoutY="267.0" mnemonicParsing="false" text="Liquid" />
+      <CheckBox fx:id="perishableCheck" layoutX="224.0" layoutY="267.0" mnemonicParsing="false" text="Perishable" />
+      <Label layoutX="5.0" layoutY="301.0" prefHeight="29.0" prefWidth="115.0" text="Expiration Date:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="expirationDatePicker" layoutX="125.0" layoutY="305.0" />
+      <Label layoutX="116.0" layoutY="442.0" text="Compartments:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="186.0" layoutY="518.0" mnemonicParsing="false" onAction="#handleAddStockToCompartment" prefHeight="33.0" prefWidth="184.0" text="Add To Selected Compartment" />
+      <ComboBox fx:id="compartmentBox" layoutX="232.0" layoutY="442.0" prefHeight="25.0" prefWidth="231.0" />
+	</children>
 </AnchorPane>

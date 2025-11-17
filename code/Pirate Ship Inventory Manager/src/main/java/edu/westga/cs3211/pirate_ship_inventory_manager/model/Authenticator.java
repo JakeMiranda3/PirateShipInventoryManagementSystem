@@ -3,6 +3,8 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Role;
+
 /**
  * Authenticator to verify user credentials
  * 
@@ -19,6 +21,7 @@ public class Authenticator {
 		this.credentialSet = new ArrayList<>();
 		User validUser1 = new User("John", "Doe");
 		User validUser2 = new User("Jane", "Doe");
+		validUser2.addRole(Role.QUARTERMASTER);
 		this.credentialSet.add(validUser1);
 		this.credentialSet.add(validUser2);
 	}

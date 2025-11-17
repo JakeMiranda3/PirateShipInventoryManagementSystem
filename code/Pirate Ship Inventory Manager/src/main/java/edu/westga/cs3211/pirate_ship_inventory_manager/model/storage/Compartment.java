@@ -27,12 +27,12 @@ public class Compartment {
 	 *                getStoredStock.isEmpty()
 	 *
 	 *
-	 *@param compartmentName the name of the compartment
-	 * @param maxCapacity    the max capacity
-	 * @param allowedQuality the allowed quality
+	 * @param compartmentName the name of the compartment
+	 * @param maxCapacity     the max capacity
+	 * @param allowedQuality  the allowed quality
 	 */
 	public Compartment(String compartmentName, int maxCapacity, SpecialQuality allowedQuality) {
-		
+
 		if (compartmentName == null || compartmentName.isBlank()) {
 			throw new IllegalArgumentException("Compartment name can't be null or empty");
 		}
@@ -44,7 +44,7 @@ public class Compartment {
 		if (allowedQuality == null) {
 			throw new IllegalArgumentException("Allowed special quality cant be null");
 		}
-		
+
 		this.compartmentName = compartmentName;
 		this.maxCapacity = maxCapacity;
 		this.usedCapacity = 0;
@@ -52,7 +52,7 @@ public class Compartment {
 		this.storedStock = new ArrayList<>();
 
 	}
-	
+
 	/**
 	 * Gets the compartment name.
 	 *
@@ -139,16 +139,15 @@ public class Compartment {
 		}
 
 		if (this.allowedQuality == SpecialQuality.NONE) {
-			return stock.getQualities().contains(SpecialQuality.NONE);
+			return stock.getQualities().size() == 1 && stock.getQualities().contains(SpecialQuality.NONE);
 		}
 
-		for (SpecialQuality specialQuality : stock.getQualities()) {
-			if (specialQuality.equals(this.allowedQuality)) {
-				return true;
-			}
-		}
+		return stock.getQualities().contains(this.allowedQuality);
+	}
 
-		return false;
+	@Override
+	public String toString() {
+		return this.allowedQuality + " Compartment (" + this.usedCapacity + "/" + this.maxCapacity + ")";
 	}
 
 }

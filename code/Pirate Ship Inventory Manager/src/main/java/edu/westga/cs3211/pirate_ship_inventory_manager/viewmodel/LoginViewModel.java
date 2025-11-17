@@ -1,6 +1,9 @@
 package edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Authenticator;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
+import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -75,6 +78,10 @@ public class LoginViewModel {
 
 		if (this.authenticator.verifyUserCredentials(username, password)) {
 			this.errorMessageProperty.set("");
+			
+			Session.setCurrentuser(new User(username, password));
+			Session.setInventory(new Inventory());
+			
 			return true;
 		} else {
 			this.errorMessageProperty.set("Invalid username or password");
