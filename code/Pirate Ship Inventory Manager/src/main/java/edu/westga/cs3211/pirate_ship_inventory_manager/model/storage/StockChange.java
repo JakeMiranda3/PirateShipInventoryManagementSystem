@@ -40,6 +40,27 @@ public class StockChange {
 	}
 
 	/**
+	 * This is a constructor to be able to have more controllability over the test
+	 * 
+	 * @precondition stock != null && user != null
+	 * @param stock     the stock
+	 * @param user      the user
+	 * @param timeAdded the timeAdded
+	 */
+	public StockChange(Stock stock, User user, LocalDateTime timeAdded) {
+		if (stock == null) {
+			throw new IllegalArgumentException("Stock cannot be null");
+		}
+		if (user == null) {
+			throw new IllegalArgumentException("User cannot be null.");
+		}
+
+		this.stock = stock;
+		this.user = user;
+		this.timeAdded = timeAdded;
+	}
+
+	/**
 	 * Gets the stock.
 	 *
 	 * @return the stock
