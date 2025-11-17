@@ -19,11 +19,29 @@ public class Authenticator {
 	 */
 	public Authenticator() {
 		this.credentialSet = new ArrayList<>();
+
 		User validUser1 = new User("John", "Doe");
 		User validUser2 = new User("Jane", "Doe");
 		validUser2.addRole(Role.QUARTERMASTER);
+
 		this.credentialSet.add(validUser1);
 		this.credentialSet.add(validUser2);
+	}
+
+	/**
+	 * Gets the user if valid.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @return the user if valid
+	 */
+	public User getUserIfValid(String username, String password) {
+		for (User user : this.credentialSet) {
+			if (user.getName().equals(username) && user.getPassword().equals(password)) {
+				return user;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -34,12 +52,7 @@ public class Authenticator {
 	 * @return true, if successful
 	 */
 	public boolean verifyUserCredentials(String username, String password) {
-		for (User user : this.credentialSet) {
-			if (user.getName().equals(username) && user.getPassword().equals(password)) {
-				return true;
-			}
-		}
-		return false;
+		return this.getUserIfValid(username, password) != null;
 	}
 
 }

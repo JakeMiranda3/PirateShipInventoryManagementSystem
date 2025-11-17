@@ -75,11 +75,13 @@ public class LoginViewModel {
 	public boolean tryLogin() {
 		String username = this.nameProperty.get();
 		String password = this.passwordProperty.get();
+		
+		User authenticatedUser = this.authenticator.getUserIfValid(username, password);
 
-		if (this.authenticator.verifyUserCredentials(username, password)) {
+		if (authenticatedUser != null) {
 			this.errorMessageProperty.set("");
 			
-			Session.setCurrentuser(new User(username, password));
+			Session.setCurrentuser(authenticatedUser);
 			Session.setInventory(new Inventory());
 			
 			return true;

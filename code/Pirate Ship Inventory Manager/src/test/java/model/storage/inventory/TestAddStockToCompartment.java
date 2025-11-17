@@ -48,7 +48,8 @@ class TestAddStockToCompartment {
 		Compartment currentCompartment = inventory.getCompartments().get(0);
 
 		assertEquals(1, currentCompartment.getUsedCapacity(), "Checks how much capacity was used after add stock");
-		assertEquals("Gold", currentCompartment.getStoredStock().get(0).getName(), "Checks the name of the stock added");
+		assertEquals("Gold", currentCompartment.getStoredStock().get(0).getName(),
+				"Checks the name of the stock added");
 	}
 
 }

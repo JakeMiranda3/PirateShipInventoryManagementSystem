@@ -54,7 +54,7 @@ public class TestConstructor {
 	@Test
 	public void testValidCompartment() {
 		Compartment compartment = new Compartment("Regular Compartment", 50, SpecialQuality.NONE);
-		
+
 		assertEquals("Regular Compartment", compartment.getCompartmentName(), "Checks name of the compartment");
 		assertEquals(50, compartment.getMaxCapacity(), "Checks the max capacity of the compartment");
 		assertEquals(SpecialQuality.NONE, compartment.getAllowedQuality(), "Checks the allowed stock quality");

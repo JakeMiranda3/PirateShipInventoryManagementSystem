@@ -54,7 +54,7 @@ public class TestConstructor {
 	@Test
 	public void testValidCrewMateUser() {
 		User user1 = new User("Username", "Password");
-		
+
 		assertEquals("Username", user1.getName(), "Checks username of the user");
 		assertEquals("Password", user1.getPassword(), "Checks the password of the user");
 		assertEquals(1, user1.getRoles().size(), "Checks if the user has the default size of 1 role");
@@ -66,10 +66,11 @@ public class TestConstructor {
 	public void testValidQuarterMasterUser() {
 		User user1 = new User("Username", "Password");
 		user1.addRole(Role.QUARTERMASTER);
-		
+
 		assertEquals("Username", user1.getName(), "Checks username of the user");
 		assertEquals("Password", user1.getPassword(), "Checks the password of the user");
 		assertEquals(2, user1.getRoles().size(), "Checks if the user has 2 roles");
+		assertTrue(user1.hasRole(Role.CREWMATE), "Checks if the user has the crewmate role");
 		assertTrue(user1.hasRole(Role.QUARTERMASTER), "Checks if the user has the quartermaster role");
 	}
 

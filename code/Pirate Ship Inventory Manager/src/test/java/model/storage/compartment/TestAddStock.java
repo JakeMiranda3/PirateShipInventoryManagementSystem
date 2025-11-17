@@ -84,4 +84,18 @@ class TestAddStock {
 		assertEquals(1, compartment.getStoredStock().size(), "Checks how many stock items are in the compartment");
 	}
 
+	@Test
+	public void testWhenNoneCompartmentCantStoreMultiSpecialQualityStock() {
+		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
+		specialQualities.add(SpecialQuality.LIQUID);
+		specialQualities.add(SpecialQuality.FLAMMABLE);
+
+		Stock stock1 = new Stock("Gas", 30, Condition.PERFECT, specialQualities, null);
+
+		Compartment compartment = new Compartment("None Compartment", 70, SpecialQuality.NONE);
+
+		assertFalse(compartment.canStoreStock(stock1),
+				"Checks that a NONE compartment can store a stock with multiple special qualities");
+	}
+
 }

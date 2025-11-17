@@ -13,20 +13,21 @@ public class TestAddCompartment {
 	@Test
 	public void testWhenAddCompartmentIsNull() {
 		Inventory inventory = new Inventory();
-		
+
 		assertThrows(IllegalArgumentException.class, () -> {
 			inventory.addCompartment(null);
 		});
 	}
-	
+
 	@Test
 	public void testWhenAddCompartmentIsValid() {
 		Inventory inventory = new Inventory();
 		Compartment compartment = new Compartment("Regular Compartment", 60, SpecialQuality.NONE);
-		
+
 		inventory.addCompartment(compartment);
-		
-		assertEquals(5, inventory.getCompartments().size(), "Checks how many compartments are in inventory, 4 are created upon initialization");
+
+		assertEquals(5, inventory.getCompartments().size(),
+				"Checks how many compartments are in inventory, 4 are created upon initialization");
 	}
 
 }
