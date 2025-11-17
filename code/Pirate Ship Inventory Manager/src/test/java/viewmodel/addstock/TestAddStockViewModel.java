@@ -11,7 +11,7 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.AddStockViewModel;
 
-public class AddStockViewModelTest {
+public class TestAddStockViewModel {
 
 	@Test
 	public void testConstructorInitializesProperties() {

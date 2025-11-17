@@ -8,7 +8,7 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Role;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.LoginViewModel;
 
-public class LoginViewModelTest {
+public class TestLoginViewModel {
 
 	@Test
 	public void testConstructorInitializesProperties() {
