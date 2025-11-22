@@ -1,0 +1,20 @@
+View Inventory
+
+Context: QuarterMaster is logged in
+
+Primary Flow
+1. Quartermaster requests to view inventory
+2. System presents quartermaster with a list of stock items.
+3. Quatermaster view a list of all the stock
+
+Alternative flows
+Quatermaster filters Stock by compartments
+A3. Quatermaster selects one or more compartments
+A4. System removes all the stock from list for stock that are not present in the selected compartment
+A5. Return to primary flow step 3
+
+Quartermaster Filters Stock by Special Quality
+A3. Quatermaster selects one or more special qualities
+A4. System removes all stock from list for stock that do not have the selected special qualities
+A5. Return to primary flow step 3
+

@@ -1,0 +1,31 @@
+Get Food
+Context: Cook is logged in
+Food exists in inventory.
+Primary Flow
+1. User indicates they want to retrieve food from the inventory.
+2. System prompts user to provide details of the food to retrieve: Name, Quantity
+3. User provides all required information.
+4. System verifies that the requested food exists in inventory and that the requested
+quantity is available.
+5. System presents the user with:
+  a. Current stock details for the food
+  b. Available quantity
+6. User confirms retrieval.
+7. System updates inventory by reducing the quantity of the retrieved food.
+8. System logs the retrieval including:
+  a. Identifier of the Cook who retrieved the food
+  b. Food name and quantity retrieved
+  c. Remaining quantity in inventory
+  d. Time of retrieval
+9. System displays confirmation message to user with all logged details.
+
+Alternative Flows
+Requested Food Not Found
+ A4. System identifies that the requested food does not exist in inventory.
+ A5. System notifies user that the food item is not found.
+ A6. Return to primary flow step 2.
+Requested Quantity Exceeds Available Quantity
+ A4. System identifies that requested quantity is greater than available quantity.
+ A5. System notifies user of available quantity.
+ A6. System prompts user to revise quantity.
+ A7. Return to primary flow step 2 with prior provided food name prefilled.
