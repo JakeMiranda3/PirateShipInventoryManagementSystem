@@ -2,6 +2,7 @@ package viewmodel.login;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Role;
@@ -9,6 +10,11 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.LoginViewModel;
 
 public class TestLoginViewModel {
+
+	@BeforeEach
+	public void resetSession() {
+		Session.clearSession();
+	}
 
 	@Test
 	public void testConstructorInitializesProperties() {
