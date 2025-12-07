@@ -10,7 +10,7 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
  * Defines a inventory which holds a collection of compartments for the pirate
  * ship
  * 
- * @author Jake Miranda
+ * @author Jake Miranda and @author fmensah1 made changes
  * @version Fall 2025
  */
 public class Inventory {
@@ -29,6 +29,19 @@ public class Inventory {
 		this.initializeCompartments();
 	}
 
+	/**
+	 * Gets the stock items.
+	 *
+	 * @return the stock items
+	 */
+	public List<Stock> getStockItems() {
+		List<Stock> allStock = new ArrayList<>();
+		for (Compartment compartment : this.compartments) {
+			allStock.addAll(compartment.getStoredStock());
+		}
+		return allStock;
+	}
+	
 	/**
 	 * Adds the compartment.
 	 *

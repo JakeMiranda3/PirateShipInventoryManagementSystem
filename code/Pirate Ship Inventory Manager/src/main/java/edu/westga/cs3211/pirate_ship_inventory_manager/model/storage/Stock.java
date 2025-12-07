@@ -130,5 +130,9 @@ public class Stock {
 	public LocalDateTime getAddedOn() {
 		return this.addedOn;
 	}
-
+	
+	@Override
+	public String toString() {
+	    return this.getName() + " (" + this.getQuantity() + " units) - " + this.getCondition();
+	}
 }
