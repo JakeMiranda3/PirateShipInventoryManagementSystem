@@ -143,7 +143,7 @@ public class AddStockViewModel {
 	public ObjectProperty<Condition> conditionProperty() {
 		return this.condition;
 	}
-	
+
 	/**
 	 * Stock type property.
 	 *
@@ -238,6 +238,10 @@ public class AddStockViewModel {
 		Set<SpecialQuality> qualities = this.buildSpecialQualities();
 		if (qualities.isEmpty()) {
 			return "Please select at least one special quality.";
+		}
+
+		if (this.stockType.get() == null) {
+			return "Please select a stock type.";
 		}
 
 		if (qualities.contains(SpecialQuality.PERISHABLE) && this.expirationDate.get() == null) {

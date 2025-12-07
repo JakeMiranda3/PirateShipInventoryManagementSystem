@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.AddStockViewModel;
 
 public class TestAddStockViewModel {
@@ -24,6 +25,7 @@ public class TestAddStockViewModel {
 		assertFalse(viewModel.flammableSelectedProperty().get(), "Checks the flammable selected property");
 		assertFalse(viewModel.liquidSelectedProperty().get(), "Checks the liquid selected property");
 		assertFalse(viewModel.perishableSelectedProperty().get(), "Checks the perishable selected property");
+		assertNull(viewModel.stockTypeProperty().get(), "Checks the stocktype property");
 		assertFalse(viewModel.expirationDateEnabledProperty().get(), "Checks the expiration date enabled property");
 		assertNull(viewModel.expirationDateProperty().get(), "Checks the expiration date property");
 		assertNull(viewModel.selectedCompartmentProperty().get(), "Checks the selected compartment property");
@@ -110,6 +112,7 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set("");
 		viewModel.quantityProperty().set(10);
 		viewModel.conditionProperty().set(Condition.PERFECT);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.noneSelectedProperty().set(true);
 
 		assertEquals("Stock name cannot be empty.", viewModel.validateInput(),
@@ -123,6 +126,7 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set(null);
 		viewModel.quantityProperty().set(10);
 		viewModel.conditionProperty().set(Condition.PERFECT);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.noneSelectedProperty().set(true);
 
 		assertEquals("Stock name cannot be empty.", viewModel.validateInput(),
@@ -136,6 +140,7 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set("Gold");
 		viewModel.quantityProperty().set(0);
 		viewModel.conditionProperty().set(Condition.USABLE);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.noneSelectedProperty().set(true);
 
 		assertEquals("Quantity must be greater than zero.", viewModel.validateInput(),
@@ -148,6 +153,7 @@ public class TestAddStockViewModel {
 
 		viewModel.nameProperty().set("Gold");
 		viewModel.quantityProperty().set(5);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.noneSelectedProperty().set(true);
 
 		assertEquals("Please select a condition.", viewModel.validateInput(),
@@ -161,6 +167,7 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set("Gold");
 		viewModel.quantityProperty().set(5);
 		viewModel.conditionProperty().set(Condition.UNUSABLE);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 
 		assertEquals("Please select at least one special quality.", viewModel.validateInput(),
 				"Ensures the validation returns the correct response");
@@ -173,6 +180,7 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set("Food");
 		viewModel.quantityProperty().set(10);
 		viewModel.conditionProperty().set(Condition.PERFECT);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.perishableSelectedProperty().set(true);
 
 		assertEquals("Perishable items must have an expiration date.", viewModel.validateInput(),
@@ -186,6 +194,7 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set("Gold");
 		viewModel.quantityProperty().set(10);
 		viewModel.conditionProperty().set(Condition.UNUSABLE);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.noneSelectedProperty().set(true);
 		viewModel.expirationDateProperty().set(LocalDate.now());
 
@@ -200,6 +209,7 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set("Gold");
 		viewModel.quantityProperty().set(2);
 		viewModel.conditionProperty().set(Condition.USABLE);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.noneSelectedProperty().set(true);
 
 		assertNull(viewModel.validateInput(), "Ensures the validation returns the correct response");
@@ -212,10 +222,24 @@ public class TestAddStockViewModel {
 		viewModel.nameProperty().set("Food");
 		viewModel.quantityProperty().set(5);
 		viewModel.conditionProperty().set(Condition.PERFECT);
+		viewModel.stockTypeProperty().set(StockType.OTHER);
 		viewModel.perishableSelectedProperty().set(true);
 		viewModel.expirationDateProperty().set(LocalDate.now());
 
 		assertNull(viewModel.validateInput(), "Ensures the validation returns the correct response");
+	}
+	
+	@Test
+	public void testValidateInputFailsWhenStockTypeMissing() {
+		AddStockViewModel viewModel = new AddStockViewModel();
+
+		viewModel.nameProperty().set("Gold");
+		viewModel.quantityProperty().set(5);
+		viewModel.conditionProperty().set(Condition.USABLE);
+		viewModel.noneSelectedProperty().set(true);
+
+		assertEquals("Please select a stock type.", viewModel.validateInput(),
+				"Ensures the validation returns the correct response");
 	}
 
 }

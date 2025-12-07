@@ -8,6 +8,6 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.enums;
  */
 public enum StockType {
 
-	Food, Other
+	FOOD, OTHER
 
 }

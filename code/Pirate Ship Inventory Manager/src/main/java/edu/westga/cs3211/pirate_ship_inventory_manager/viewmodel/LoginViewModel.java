@@ -95,7 +95,7 @@ public class LoginViewModel {
 			User jackSparrow = new User("Jack Sparrow", "password");
 			Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 			specialQualities.add(SpecialQuality.NONE);
-			Stock gold = new Stock("Gold", 5, Condition.PERFECT, specialQualities, null, StockType.Other);
+			Stock gold = new Stock("Gold", 5, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 			Session.getInventory().addStockChange(new StockChange(gold, jackSparrow));
 
 			return true;

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Compartment;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
 
@@ -18,7 +19,7 @@ class TestAddStock {
 	public void testWhenCompartmentCantFitStock() {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
-		Stock stock1 = new Stock("Gold", 70, Condition.PERFECT, specialQualities, null);
+		Stock stock1 = new Stock("Gold", 70, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		Compartment compartment = new Compartment("Regular Compartment", 60, SpecialQuality.NONE);
 
@@ -31,7 +32,7 @@ class TestAddStock {
 	public void testWhenCompartmentCantStoreNoSpecialQualityStock() {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.LIQUID);
-		Stock stock1 = new Stock("Water", 30, Condition.PERFECT, specialQualities, null);
+		Stock stock1 = new Stock("Water", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		Compartment compartment = new Compartment("Liquid Compartment", 60, SpecialQuality.NONE);
 
@@ -44,7 +45,7 @@ class TestAddStock {
 	public void testWhenCompartmentCantStoreSpecialQualityStock() {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.LIQUID);
-		Stock stock1 = new Stock("Water", 30, Condition.PERFECT, specialQualities, null);
+		Stock stock1 = new Stock("Water", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		Compartment compartment = new Compartment("Liquid Compartment", 60, SpecialQuality.FLAMMABLE);
 
@@ -57,7 +58,7 @@ class TestAddStock {
 	public void testWhenCompartmentHasNoSpecialQuality() {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
-		Stock stock1 = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null);
+		Stock stock1 = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		Compartment compartment = new Compartment("Regular Compartment", 70, SpecialQuality.NONE);
 		compartment.addStock(stock1);
@@ -73,7 +74,7 @@ class TestAddStock {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.LIQUID);
 		specialQualities.add(SpecialQuality.FLAMMABLE);
-		Stock stock1 = new Stock("Gas", 30, Condition.PERFECT, specialQualities, null);
+		Stock stock1 = new Stock("Gas", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		Compartment compartment = new Compartment("Regular Compartment", 70, SpecialQuality.FLAMMABLE);
 		compartment.addStock(stock1);
@@ -90,7 +91,7 @@ class TestAddStock {
 		specialQualities.add(SpecialQuality.LIQUID);
 		specialQualities.add(SpecialQuality.FLAMMABLE);
 
-		Stock stock1 = new Stock("Gas", 30, Condition.PERFECT, specialQualities, null);
+		Stock stock1 = new Stock("Gas", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		Compartment compartment = new Compartment("None Compartment", 70, SpecialQuality.NONE);
 

@@ -30,7 +30,7 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.Other);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
 		Session.getInventory().addStockChange(new StockChange(flammable, user));
 		Session.getInventory().addStockChange(new StockChange(flammable, user2));
@@ -55,8 +55,8 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual2 = new HashSet<SpecialQuality>();
 		specialQual2.add(SpecialQuality.LIQUID);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.Other);
-		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.Other);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
+		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.OTHER);
 
 		Session.getInventory().addStockChange(new StockChange(flammable, user));
 		Session.getInventory().addStockChange(new StockChange(liquid, user));
@@ -80,7 +80,7 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.Other);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
 		Session.getInventory().addStockChange(new StockChange(flammable, user));
 		Session.getInventory().addStockChange(new StockChange(flammable, user2));
@@ -111,7 +111,7 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.PERISHABLE);
 		LocalDate date = LocalDate.parse("2025-11-16");
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.Other);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
 		LocalDateTime currentDay = LocalDateTime.now();
 
 		assertThrows(IllegalArgumentException.class, () -> {
@@ -128,7 +128,7 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.Other);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
 		LocalDateTime currentDay = LocalDateTime.now();
 		StockChange change1 = new StockChange(flammable, user, yesterday);
@@ -156,7 +156,7 @@ class TestViewStockChangesViewModel {
 		User user = new User("John", "Doe");
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.Other);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
 		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
 		LocalDateTime currentDay = LocalDateTime.now();
@@ -202,7 +202,7 @@ class TestViewStockChangesViewModel {
 		User user = new User("John", "Doe");
 		Set<SpecialQuality> specialQual1 = new HashSet<>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
-		Stock stock = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.Other);
+		Stock stock = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
 		StockChange stockChange1 = new StockChange(stock, user, LocalDateTime.now().minusDays(3));
 		StockChange stockChange2 = new StockChange(stock, user, LocalDateTime.now());
@@ -230,8 +230,8 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual2 = new HashSet<SpecialQuality>();
 		specialQual2.add(SpecialQuality.LIQUID);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.Other);
-		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.Other);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
+		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.OTHER);
 
 		Session.getInventory().addStockChange(new StockChange(flammable, user));
 		Session.getInventory().addStockChange(new StockChange(liquid, user));

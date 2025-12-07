@@ -36,7 +36,7 @@ public class AddStockCodeBehind {
 
 	@FXML
 	private ComboBox<Condition> conditionBox;
-	
+
 	@FXML
 	private ComboBox<StockType> stockTypeBox;
 
@@ -138,13 +138,14 @@ public class AddStockCodeBehind {
 		this.quantitySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 1));
 
 		this.conditionBox.getItems().addAll(Condition.values());
-		
+
 		this.stockTypeBox.getItems().addAll(StockType.values());
 
 		this.nameField.textProperty().bindBidirectional(this.viewModel.nameProperty());
 		this.quantitySpinner.getValueFactory().valueProperty()
 				.bindBidirectional(this.viewModel.quantityProperty().asObject());
 		this.conditionBox.valueProperty().bindBidirectional(this.viewModel.conditionProperty());
+		this.stockTypeBox.valueProperty().bindBidirectional(this.viewModel.stockTypeProperty());
 
 		this.noneCheck.selectedProperty().bindBidirectional(this.viewModel.noneSelectedProperty());
 		this.flammableCheck.selectedProperty().bindBidirectional(this.viewModel.flammableSelectedProperty());
