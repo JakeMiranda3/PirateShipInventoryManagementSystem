@@ -6,6 +6,7 @@ import java.util.Set;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Compartment;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -28,6 +29,7 @@ public class AddStockViewModel {
 	private StringProperty name;
 	private IntegerProperty quantity;
 	private ObjectProperty<Condition> condition;
+	private ObjectProperty<StockType> stockType;
 
 	private BooleanProperty noneSelected;
 	private BooleanProperty flammableSelected;
@@ -45,6 +47,7 @@ public class AddStockViewModel {
 		this.name = new SimpleStringProperty("");
 		this.quantity = new SimpleIntegerProperty(1);
 		this.condition = new SimpleObjectProperty<>();
+		this.stockType = new SimpleObjectProperty<>();
 
 		this.noneSelected = new SimpleBooleanProperty(false);
 		this.flammableSelected = new SimpleBooleanProperty(false);
@@ -139,6 +142,15 @@ public class AddStockViewModel {
 	 */
 	public ObjectProperty<Condition> conditionProperty() {
 		return this.condition;
+	}
+	
+	/**
+	 * Stock type property.
+	 *
+	 * @return the object property
+	 */
+	public ObjectProperty<StockType> stockTypeProperty() {
+		return this.stockType;
 	}
 
 	/**
