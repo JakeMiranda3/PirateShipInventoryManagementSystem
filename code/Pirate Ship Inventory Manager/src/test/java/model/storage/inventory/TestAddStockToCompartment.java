@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Compartment;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
@@ -29,7 +30,7 @@ class TestAddStockToCompartment {
 		Inventory inventory = new Inventory();
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
-		Stock stock = new Stock("Gold", 1, Condition.PERFECT, specialQualities, null);
+		Stock stock = new Stock("Gold", 1, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			inventory.addStockToCompartment(stock, null);
@@ -41,7 +42,7 @@ class TestAddStockToCompartment {
 		Inventory inventory = new Inventory();
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
-		Stock stock = new Stock("Gold", 1, Condition.PERFECT, specialQualities, null);
+		Stock stock = new Stock("Gold", 1, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		inventory.addStockToCompartment(stock, inventory.getCompartments().get(0));
 
