@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Compartment;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
@@ -44,7 +45,7 @@ public class ViewInventoryCodeBehind {
 
     /** The stock type combo box. */
     @FXML
-    private ComboBox<String> stockTypeComboBox;
+    private ComboBox<StockType> stockTypeComboBox;
 
     /** The view model. */
     private ViewInventoryViewModel viewModel;
@@ -67,12 +68,14 @@ public class ViewInventoryCodeBehind {
         );
         
         this.specialQualityComboBox.getItems().addAll(SpecialQuality.values()); 
+        this.stockTypeComboBox.getItems().addAll(StockType.values());
 
         this.compartmentComboBox.valueProperty().bindBidirectional(this.viewModel.getSelectedCompartmentProperty());
         this.specialQualityComboBox.valueProperty().bindBidirectional(this.viewModel.getSelectedQualityProperty());
-
+        this.stockTypeComboBox.valueProperty().bindBidirectional(this.viewModel.getSelectedStockTypeProperty());
         this.compartmentComboBox.setOnAction(e -> this.viewModel.applyFilters());
         this.specialQualityComboBox.setOnAction(e -> this.viewModel.applyFilters());
+        this.stockTypeComboBox.setOnAction(e -> this.viewModel.applyFilters());
     }
 
     /**
