@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
-import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Compartment;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
