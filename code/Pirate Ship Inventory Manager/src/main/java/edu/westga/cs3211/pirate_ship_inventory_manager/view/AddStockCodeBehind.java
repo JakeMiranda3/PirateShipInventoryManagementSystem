@@ -3,6 +3,7 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.view;
 import java.io.IOException;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Compartment;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
@@ -35,6 +36,9 @@ public class AddStockCodeBehind {
 
 	@FXML
 	private ComboBox<Condition> conditionBox;
+
+	@FXML
+	private ComboBox<StockType> stockTypeBox;
 
 	@FXML
 	private CheckBox flammableCheck;
@@ -99,7 +103,7 @@ public class AddStockCodeBehind {
 
 		Stock stock = new Stock(this.viewModel.nameProperty().get(), this.viewModel.quantityProperty().get(),
 				this.viewModel.conditionProperty().get(), this.viewModel.buildSpecialQualities(),
-				this.viewModel.expirationDateProperty().get());
+				this.viewModel.expirationDateProperty().get(), this.viewModel.stockTypeProperty().get());
 
 		Compartment selectedCompartment = this.compartmentBox.getValue();
 
@@ -134,10 +138,13 @@ public class AddStockCodeBehind {
 
 		this.conditionBox.getItems().addAll(Condition.values());
 
+		this.stockTypeBox.getItems().addAll(StockType.values());
+
 		this.nameField.textProperty().bindBidirectional(this.viewModel.nameProperty());
 		this.quantitySpinner.getValueFactory().valueProperty()
 				.bindBidirectional(this.viewModel.quantityProperty().asObject());
 		this.conditionBox.valueProperty().bindBidirectional(this.viewModel.conditionProperty());
+		this.stockTypeBox.valueProperty().bindBidirectional(this.viewModel.stockTypeProperty());
 
 		this.noneCheck.selectedProperty().bindBidirectional(this.viewModel.noneSelectedProperty());
 		this.flammableCheck.selectedProperty().bindBidirectional(this.viewModel.flammableSelectedProperty());

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
 
 public class TestConstructor {
@@ -20,7 +21,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.NONE);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock(null, 30, Condition.USABLE, specialQualities, null);
+			new Stock(null, 30, Condition.USABLE, specialQualities, null, StockType.OTHER);
 		});
 	}
 
@@ -30,7 +31,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.NONE);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock(" ", 30, Condition.USABLE, specialQualities, null);
+			new Stock(" ", 30, Condition.USABLE, specialQualities, null, StockType.OTHER);
 		});
 	}
 
@@ -40,7 +41,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.NONE);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock("", 30, Condition.USABLE, specialQualities, null);
+			new Stock("", 30, Condition.USABLE, specialQualities, null, StockType.OTHER);
 		});
 	}
 
@@ -50,7 +51,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.NONE);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock("Gold", 0, Condition.USABLE, specialQualities, null);
+			new Stock("Gold", 0, Condition.USABLE, specialQualities, null, StockType.OTHER);
 		});
 	}
 
@@ -60,7 +61,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.NONE);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock("Gold", -5, Condition.USABLE, specialQualities, null);
+			new Stock("Gold", -5, Condition.USABLE, specialQualities, null, StockType.OTHER);
 		});
 	}
 
@@ -70,7 +71,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.NONE);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock("Gold", 30, null, specialQualities, null);
+			new Stock("Gold", 30, null, specialQualities, null, StockType.OTHER);
 		});
 	}
 
@@ -78,7 +79,7 @@ public class TestConstructor {
 	public void testWhenQualitiesIsNull() {
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock("Gold", 30, Condition.USABLE, null, null);
+			new Stock("Gold", 30, Condition.USABLE, null, null, StockType.OTHER);
 		});
 	}
 
@@ -89,7 +90,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.LIQUID);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock("Gold", 30, Condition.USABLE, specialQualities, null);
+			new Stock("Gold", 30, Condition.USABLE, specialQualities, null, StockType.OTHER);
 		});
 	}
 
@@ -99,7 +100,17 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.PERISHABLE);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new Stock("Gold", 30, Condition.USABLE, specialQualities, null);
+			new Stock("Gold", 30, Condition.USABLE, specialQualities, null, StockType.OTHER);
+		});
+	}
+	
+	@Test
+	public void testWhenStockTypeIsNull() {
+		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
+		specialQualities.add(SpecialQuality.NONE);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Stock("Gold", 5, Condition.USABLE, specialQualities, null, null);
 		});
 	}
 
@@ -108,7 +119,7 @@ public class TestConstructor {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
 
-		Stock stockItem = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null);
+		Stock stockItem = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
 		assertEquals("Gold", stockItem.getName(), "Checks the stock's name");
 		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
@@ -123,7 +134,7 @@ public class TestConstructor {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
 
-		Stock stockItem = new Stock("Gold", 30, Condition.USABLE, specialQualities, null);
+		Stock stockItem = new Stock("Gold", 30, Condition.USABLE, specialQualities, null, StockType.OTHER);
 
 		assertEquals("Gold", stockItem.getName(), "Checks the stock's name");
 		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
@@ -139,7 +150,7 @@ public class TestConstructor {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
 
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, null);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, null, StockType.OTHER);
 
 		assertEquals("Gold", stockItem.getName(), "Checks the stock's name");
 		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
@@ -155,7 +166,7 @@ public class TestConstructor {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
 
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, null);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, null, StockType.OTHER);
 
 		assertEquals("Gold", stockItem.getName(), "Checks the stock's name");
 		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
@@ -172,7 +183,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.LIQUID);
 		specialQualities.add(SpecialQuality.FLAMMABLE);
 
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, null);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, null, StockType.OTHER);
 
 		assertEquals("Gold", stockItem.getName(), "Checks the stock's name");
 		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
@@ -189,7 +200,7 @@ public class TestConstructor {
 		specialQualities.add(SpecialQuality.PERISHABLE);
 		LocalDate date = LocalDate.parse("2025-11-16");
 
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
 
 		assertEquals("Gold", stockItem.getName(), "Checks the stock's name");
 		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
@@ -198,6 +209,38 @@ public class TestConstructor {
 		assertEquals(date, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
 		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
 
+	}
+	
+	@Test
+	public void testStockWithFoodStockType() {
+		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
+		specialQualities.add(SpecialQuality.FLAMMABLE);
+
+		Stock stockItem = new Stock("Bread", 30, Condition.UNUSABLE, specialQualities, null, StockType.FOOD);
+
+		assertEquals("Bread", stockItem.getName(), "Checks the stock's name");
+		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
+		assertEquals(Condition.UNUSABLE, stockItem.getCondition(), "Checks the condition of the stock");
+		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
+		assertEquals(null, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
+		assertEquals(StockType.FOOD, stockItem.getStockType(), "Checks the stocks type");
+	}
+	
+	@Test
+	public void testStockWithFoodOtherType() {
+		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
+		specialQualities.add(SpecialQuality.FLAMMABLE);
+
+		Stock stockItem = new Stock("Bread", 30, Condition.UNUSABLE, specialQualities, null, StockType.OTHER);
+
+		assertEquals("Bread", stockItem.getName(), "Checks the stock's name");
+		assertEquals(30, stockItem.getQuantity(), "Checks the amount of the stock");
+		assertEquals(Condition.UNUSABLE, stockItem.getCondition(), "Checks the condition of the stock");
+		assertEquals(specialQualities, stockItem.getQualities(), "Checks the qualities of the stock");
+		assertEquals(null, stockItem.getExpirationDate(), "Defaults to null since stock isn't perishable");
+		assertNotNull(stockItem.getAddedOn(), "Should be initialized");
+		assertEquals(StockType.OTHER, stockItem.getStockType(), "Checks the stocks type");
 	}
 
 }

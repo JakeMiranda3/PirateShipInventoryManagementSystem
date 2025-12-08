@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
@@ -32,7 +33,7 @@ public class TestAddStockChange {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.NONE);
 
-		Stock stockItem = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null);
+		Stock stockItem = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 		StockChange stockChange = new StockChange(stockItem, user);
 		
 		inventory.addStockChange(stockChange);

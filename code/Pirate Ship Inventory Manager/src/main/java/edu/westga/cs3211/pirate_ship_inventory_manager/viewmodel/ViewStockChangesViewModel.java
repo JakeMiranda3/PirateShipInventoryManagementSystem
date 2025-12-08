@@ -1,6 +1,7 @@
 package edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -10,7 +11,9 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.StockChange;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +44,18 @@ public class ViewStockChangesViewModel {
 	/** The end date. */
 	private ObjectProperty<LocalDate> endDate;
 
+	/** The start hour. */
+	private IntegerProperty startHour;
+
+	/** The start minute. */
+	private IntegerProperty startMinute;
+
+	/** The end hour. */
+	private IntegerProperty endHour;
+
+	/** The end minute. */
+	private IntegerProperty endMinute;
+
 	/**
 	 * Instantiates a new view stock changes view model.
 	 */
@@ -52,6 +67,11 @@ public class ViewStockChangesViewModel {
 
 		this.startDate = new SimpleObjectProperty<>(null);
 		this.endDate = new SimpleObjectProperty<>(null);
+
+		this.startHour = new SimpleIntegerProperty(0);
+		this.startMinute = new SimpleIntegerProperty(0);
+		this.endHour = new SimpleIntegerProperty(23);
+		this.endMinute = new SimpleIntegerProperty(59);
 
 	}
 
@@ -101,9 +121,67 @@ public class ViewStockChangesViewModel {
 	}
 
 	/**
+	 * Start hour property.
+	 *
+	 * @return the integer property
+	 */
+	public IntegerProperty startHourProperty() {
+		return this.startHour;
+	}
+
+	/**
+	 * Start minute property.
+	 *
+	 * @return the integer property
+	 */
+	public IntegerProperty startMinuteProperty() {
+		return this.startMinute;
+	}
+
+	/**
+	 * End hour property.
+	 *
+	 * @return the integer property
+	 */
+	public IntegerProperty endHourProperty() {
+		return this.endHour;
+	}
+
+	/**
+	 * End minute property.
+	 *
+	 * @return the integer property
+	 */
+	public IntegerProperty endMinuteProperty() {
+		return this.endMinute;
+	}
+
+	/**
 	 * Apply filters based on UI selection.
 	 */
 	public void applyFilters() {
+		if (this.startDate.get() == null || this.endDate.get() == null) {
+			if (this.startHour.get() != 0 || this.startMinute.get() != 0 || this.endHour.get() != 23
+					|| this.endMinute.get() != 59) {
+				throw new IllegalArgumentException(
+						"Please set both start and end date before applying the time filters.");
+			}
+		}
+
+		LocalDateTime localStartDateTime = null;
+		LocalDateTime localEndDateTime = null;
+
+		if (this.startDate.get() != null) {
+			localStartDateTime = this.startDate.get().atTime(this.startHour.get(), this.startMinute.get());
+		}
+
+		if (this.endDate.get() != null) {
+			localEndDateTime = this.endDate.get().atTime(this.endHour.get(), this.endMinute.get());
+		}
+
+		final LocalDateTime finalStart = localStartDateTime;
+		final LocalDateTime finalEnd = localEndDateTime;
+
 		List<StockChange> filtered = new ArrayList<>(this.allChanges);
 
 		if (this.selectedQuality.get() != null) {
@@ -118,23 +196,19 @@ public class ViewStockChangesViewModel {
 					.collect(Collectors.toList());
 		}
 
-		LocalDate startDate = this.startDate.get();
-		LocalDate endDate = this.endDate.get();
-		if (startDate != null && endDate != null) {
-			if (!endDate.isAfter(startDate)) {
-				throw new IllegalArgumentException("End date must be after start date");
+		if (finalStart != null && finalEnd != null) {
+			if (!finalEnd.isAfter(finalStart)) {
+				throw new IllegalArgumentException("End date/time must be after start date");
 			}
 		}
 
-		if (startDate != null) {
-			filtered = filtered.stream()
-					.filter(stockChange -> !stockChange.getTimeAdded().toLocalDate().isBefore(startDate))
+		if (finalStart != null) {
+			filtered = filtered.stream().filter(stockChange -> !stockChange.getTimeAdded().isBefore(finalStart))
 					.collect(Collectors.toList());
 		}
 
-		if (endDate != null) {
-			filtered = filtered.stream()
-					.filter(stockChange -> !stockChange.getTimeAdded().toLocalDate().isAfter(endDate))
+		if (finalEnd != null) {
+			filtered = filtered.stream().filter(stockChange -> !stockChange.getTimeAdded().isAfter(finalEnd))
 					.collect(Collectors.toList());
 		}
 
@@ -151,8 +225,12 @@ public class ViewStockChangesViewModel {
 		this.selectedCrewmate.set(null);
 		this.startDate.set(null);
 		this.endDate.set(null);
-
+		this.startHour.set(0);
+		this.startMinute.set(0);
+		this.endHour.set(23);
+		this.endMinute.set(59);
 		this.filteredChanges.setAll(this.allChanges);
+
 	}
 
 }
