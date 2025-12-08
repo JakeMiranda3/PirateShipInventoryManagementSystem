@@ -196,7 +196,21 @@ class TestViewStockChangesViewModel {
 	}
 
 	@Test
-	public void TestvalidDateRange() {
+	public void testTimeWithoutDateThrowsException() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+		viewModel.endHourProperty().set(6);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testValidDateRange() {
 		Session.setInventory(new Inventory());
 
 		User user = new User("John", "Doe");
@@ -214,6 +228,7 @@ class TestViewStockChangesViewModel {
 
 		viewModel.startDateProperty().set(LocalDate.now().minusDays(5));
 		viewModel.endDateProperty().set(LocalDate.now());
+
 		viewModel.applyFilters();
 
 		assertEquals(2, viewModel.getFilteredChangesProperty().size(), "Valid date range");
@@ -249,6 +264,121 @@ class TestViewStockChangesViewModel {
 		assertNull(viewModel.getSelectedCrewmateProperty().get(), "Checks the value of selected crewmate");
 		assertNull(viewModel.startDateProperty().get(), "Checks the value of selected start date");
 		assertNull(viewModel.endDateProperty().get(), "Checks the value of selected end date");
+		assertEquals(0, viewModel.startMinuteProperty().get(), "Checks the start minute value");
+		assertEquals(0, viewModel.startHourProperty().get(), "Checks the start hour value");
+		assertEquals(59, viewModel.endMinuteProperty().get(), "Checks the end minute value");
+		assertEquals(23, viewModel.endHourProperty().get(), "Checks the end hour value");
+	}
+
+	@Test
+	public void testAllTimeFieldsDefault() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(0);
+		viewModel.startMinuteProperty().set(0);
+		viewModel.endHourProperty().set(23);
+		viewModel.endMinuteProperty().set(59);
+
+		assertDoesNotThrow(() -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testOneTimeFieldModified() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testMultipleTimeFieldsModified() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+		viewModel.endMinuteProperty().set(30);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testAllTimeFieldsModified() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+		viewModel.startMinuteProperty().set(30);
+		viewModel.endHourProperty().set(22);
+		viewModel.endMinuteProperty().set(45);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForStartMinuteTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startMinuteProperty().set(1);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForEndMinuteTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.endMinuteProperty().set(58);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForStartHourTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(1);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForEndHourTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.endHourProperty().set(22);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
 	}
 
 }

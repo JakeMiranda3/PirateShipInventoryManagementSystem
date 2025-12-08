@@ -5,26 +5,19 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity"
-	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-	prefHeight="600.0" prefWidth="600.0"
-	xmlns="http://javafx.com/javafx/23.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="edu.westga.cs3211.pirate_ship_inventory_manager.view.ViewStockChangesCodeBehind">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.pirate_ship_inventory_manager.view.ViewStockChangesCodeBehind">
 	<children>
-		<Label alignment="CENTER" layoutX="202.0" layoutY="11.0"
-			prefHeight="41.0" prefWidth="158.0" text="Stock Changes">
+		<Label alignment="CENTER" layoutX="202.0" layoutY="11.0" prefHeight="41.0" prefWidth="158.0" text="Stock Changes">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<ListView fx:id="stockChangesList" layoutX="23.0"
-			layoutY="59.0" prefHeight="248.0" prefWidth="555.0" />
-		<Label layoutX="23.0" layoutY="318.0" prefHeight="17.0"
-			prefWidth="82.0" text="Filters:">
+		<ListView fx:id="stockChangesList" layoutX="23.0" layoutY="59.0" prefHeight="248.0" prefWidth="555.0" />
+		<Label layoutX="23.0" layoutY="318.0" prefHeight="17.0" prefWidth="82.0" text="Filters:">
 			<font>
 				<Font size="16.0" />
 			</font>
@@ -34,48 +27,63 @@
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<ComboBox fx:id="specialQualityBox" layoutX="23.0"
-			layoutY="380.0" prefWidth="150.0" />
+		<ComboBox fx:id="specialQualityBox" layoutX="23.0" layoutY="380.0" prefWidth="150.0" />
 		<Label layoutX="23.0" layoutY="426.0" text="Crewmates">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<ComboBox fx:id="crewmateBox" layoutX="23.0" layoutY="460.0"
-			prefWidth="150.0" />
-		<Label layoutX="328.0" layoutY="348.0" text="Start Date">
+		<ComboBox fx:id="crewmateBox" layoutX="23.0" layoutY="460.0" prefWidth="150.0" />
+		<Label layoutX="278.0" layoutY="348.0" text="Start Date">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<DatePicker fx:id="startDatePicker" layoutX="323.0"
-			layoutY="380.0" />
-		<Label layoutX="331.0" layoutY="426.0" text="End Date">
+		<DatePicker fx:id="startDatePicker" layoutX="278.0" layoutY="373.0" />
+      <Spinner fx:id="startHourSpinner" layoutX="278.0" layoutY="426.0" prefHeight="25.0" prefWidth="78.0" />
+      <Spinner fx:id="startMinuteSpinner" layoutX="366.0" layoutY="426.0" prefHeight="25.0" prefWidth="78.0" />
+		<Label layoutX="278.0" layoutY="460.0" text="End Date">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<DatePicker fx:id="endDatePicker" layoutX="323.0"
-			layoutY="460.0" />
-		<Button fx:id="applyFiltersButton" layoutX="173.0"
-			layoutY="529.0" mnemonicParsing="false"
-			onAction="#handleApplyFilters" text="Filter">
+		<DatePicker fx:id="endDatePicker" layoutX="278.0" layoutY="485.0" />
+		<Button fx:id="applyFiltersButton" layoutX="23.0" layoutY="538.0" mnemonicParsing="false" onAction="#handleApplyFilters" text="Filter">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Button>
-		<Button fx:id="resetFiltersButton" layoutX="333.0"
-			layoutY="529.0" mnemonicParsing="false"
-			onAction="#handleResetFilters" text="Reset">
+		<Button fx:id="resetFiltersButton" layoutX="105.0" layoutY="538.0" mnemonicParsing="false" onAction="#handleResetFilters" text="Reset">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Button>
-		<Button layoutX="513.0" layoutY="14.0" mnemonicParsing="false"
-			onAction="#handleHome" text="Home">
+		<Button layoutX="513.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleHome" text="Home">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Button>
+      <Spinner fx:id="endHourSpinner" layoutX="278.0" layoutY="539.0" prefHeight="25.0" prefWidth="78.0" />
+      <Spinner fx:id="endMinuteSpinner" layoutX="366.0" layoutY="539.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label alignment="CENTER" layoutX="278.0" layoutY="402.0" prefHeight="25.0" prefWidth="61.0" text="Hour">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="366.0" layoutY="402.0" prefHeight="25.0" prefWidth="78.0" text="Minutes">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="278.0" layoutY="510.0" prefHeight="25.0" prefWidth="61.0" text="Hour">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="366.0" layoutY="510.0" prefHeight="25.0" prefWidth="78.0" text="Minutes">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
 	</children>
 </AnchorPane>
