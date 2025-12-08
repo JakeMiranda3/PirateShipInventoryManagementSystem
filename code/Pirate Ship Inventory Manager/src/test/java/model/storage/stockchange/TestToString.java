@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
@@ -25,7 +26,7 @@ public class TestToString {
 		specialQualities.add(SpecialQuality.PERISHABLE);
 		LocalDate date = LocalDate.parse("2025-11-16");
 		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
-		StockChange stockChange = new StockChange(stockItem, user);
+		StockChange stockChange = new StockChange(stockItem, user, ActionType.ADDED);
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		String timeAdded = stockChange.getTimeAdded().format(formatter);

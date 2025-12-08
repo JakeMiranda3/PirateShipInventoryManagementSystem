@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
@@ -32,12 +33,13 @@ public class TestGetUsersWhoMadeChanges {
 		specialQualities.add(SpecialQuality.NONE);
 
 		Stock stockItem = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
-		StockChange stockChange = new StockChange(stockItem, user);
+		StockChange stockChange = new StockChange(stockItem, user, ActionType.ADDED);
 
 		inventory.addStockChange(stockChange);
 		assertEquals(1, inventory.getStockChanges().size(), "Checks the size of the list");
 		assertEquals(stockChange, inventory.getStockChanges().get(0), "Gets the item in the first index");
 		assertEquals(user, inventory.getUsersWhoMadeChanges().get(0), "Gets the most recent user to make a change");
+		assertEquals(ActionType.ADDED, stockChange.getTypeOfStockChange(), "Checks the stockchange type");
 
 	}
 
@@ -51,8 +53,8 @@ public class TestGetUsersWhoMadeChanges {
 		specialQualities.add(SpecialQuality.NONE);
 		Stock stockItem = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
-		inventory.addStockChange(new StockChange(stockItem, john));
-		inventory.addStockChange(new StockChange(stockItem, jane));
+		inventory.addStockChange(new StockChange(stockItem, john, ActionType.ADDED));
+		inventory.addStockChange(new StockChange(stockItem, jane, ActionType.ADDED));
 
 		List<User> users = inventory.getUsersWhoMadeChanges();
 
@@ -69,8 +71,8 @@ public class TestGetUsersWhoMadeChanges {
 		specialQualities.add(SpecialQuality.NONE);
 		Stock stockItem = new Stock("Gold", 30, Condition.PERFECT, specialQualities, null, StockType.OTHER);
 
-		inventory.addStockChange(new StockChange(stockItem, john));
-		inventory.addStockChange(new StockChange(stockItem, john));
+		inventory.addStockChange(new StockChange(stockItem, john, ActionType.ADDED));
+		inventory.addStockChange(new StockChange(stockItem, john, ActionType.ADDED));
 
 		List<User> users = inventory.getUsersWhoMadeChanges();
 

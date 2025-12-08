@@ -2,6 +2,7 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.view;
 
 import java.io.IOException;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
@@ -124,7 +125,7 @@ public class AddStockCodeBehind {
 		}
 
 		selectedCompartment.addStock(stock);
-		Session.getInventory().addStockChange(new StockChange(stock, Session.getCurrentUser()));
+		Session.getInventory().addStockChange(new StockChange(stock, Session.getCurrentUser(), ActionType.ADDED));
 		int index = this.compartmentBox.getItems().indexOf(selectedCompartment);
 		this.compartmentBox.getItems().set(index, selectedCompartment);
 		new Alert(Alert.AlertType.INFORMATION, "Stock added successfully!").showAndWait();

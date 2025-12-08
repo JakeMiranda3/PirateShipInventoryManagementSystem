@@ -3,6 +3,7 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.model.storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 
 /**
@@ -16,16 +17,18 @@ public class StockChange {
 	private Stock stock;
 	private User user;
 	private LocalDateTime timeAdded;
+	private ActionType actionType;
 
 	/**
 	 * Instantiates a new stock change.
 	 * 
 	 * @precondition stock != null && user != null
-	 * @param stock the stock
-	 * @param user  the user
+	 * @param stock      the stock
+	 * @param user       the user
+	 * @param actionType the type of action the stock change is
 	 * 
 	 */
-	public StockChange(Stock stock, User user) {
+	public StockChange(Stock stock, User user, ActionType actionType) {
 		if (stock == null) {
 			throw new IllegalArgumentException("Stock cannot be null");
 		}
@@ -34,9 +37,14 @@ public class StockChange {
 			throw new IllegalArgumentException("User cannot be null.");
 		}
 
+		if (actionType == null) {
+			throw new IllegalArgumentException("Action type cannot be null");
+		}
+
 		this.stock = stock;
 		this.user = user;
 		this.timeAdded = LocalDateTime.now();
+		this.actionType = actionType;
 	}
 
 	/**
@@ -87,11 +95,20 @@ public class StockChange {
 		return this.timeAdded;
 	}
 
+	/**
+	 * Gets the type of stock change.
+	 *
+	 * @return the type of stock change
+	 */
+	public ActionType getTypeOfStockChange() {
+		return this.actionType;
+	}
+
 	@Override
 	public String toString() {
 		DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		String formattedTime = this.timeAdded.format(formatTime);
-		return this.user.getName() + " added " + this.stock.getQuantity() + " " + this.stock.getName() + " at "
+		return this.user.getName() + " " + this.actionType.name().toLowerCase() + " " + this.stock.getQuantity() + " " + this.stock.getName() + " at "
 				+ formattedTime;
 	}
 
