@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
@@ -32,8 +33,8 @@ class TestViewStockChangesViewModel {
 
 		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(flammable, user2));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(flammable, user2, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 
@@ -58,8 +59,8 @@ class TestViewStockChangesViewModel {
 		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(liquid, user));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(liquid, user, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 
@@ -82,8 +83,8 @@ class TestViewStockChangesViewModel {
 
 		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(flammable, user2));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(flammable, user2, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 		viewModel.getSelectedCrewmateProperty().set(user);
@@ -93,6 +94,32 @@ class TestViewStockChangesViewModel {
 				"Ensures after filters that the specific crewmate shows up");
 		assertEquals("John", viewModel.getFilteredChangesProperty().get(0).getUser().getName(),
 				"Ensures after the filters that the specific crewmate matches the name");
+
+	}
+	
+	@Test
+	public void testFilterBySpecificAction() {
+		Session.setInventory(new Inventory());
+
+		User user = new User("John", "Doe");
+		User user2 = new User("Jane", "Doe");
+		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
+		specialQual1.add(SpecialQuality.FLAMMABLE);
+
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
+
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(flammable, user2, ActionType.REMOVED));
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+		viewModel.getSelectedActionType().set(ActionType.ADDED);
+		viewModel.applyFilters();
+
+		assertEquals(1, viewModel.getFilteredChangesProperty().size(),
+				"Ensures after filters that the specific crewmate shows up");
+		assertEquals("John", viewModel.getFilteredChangesProperty().get(0).getUser().getName(),
+				"Ensures after the filters that the specific crewmate shows up");
+		assertEquals(ActionType.ADDED, viewModel.getFilteredChangesProperty().get(0).getTypeOfStockChange());
 
 	}
 
@@ -248,8 +275,8 @@ class TestViewStockChangesViewModel {
 		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(liquid, user));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(liquid, user, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 
@@ -268,6 +295,7 @@ class TestViewStockChangesViewModel {
 		assertEquals(0, viewModel.startHourProperty().get(), "Checks the start hour value");
 		assertEquals(59, viewModel.endMinuteProperty().get(), "Checks the end minute value");
 		assertEquals(23, viewModel.endHourProperty().get(), "Checks the end hour value");
+		assertNull(viewModel.getSelectedActionType().get(), "Checks the value of selected action type");
 	}
 
 	@Test

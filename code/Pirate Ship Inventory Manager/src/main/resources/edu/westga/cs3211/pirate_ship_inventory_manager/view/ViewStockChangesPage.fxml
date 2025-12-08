@@ -34,20 +34,26 @@
 			</font>
 		</Label>
 		<ComboBox fx:id="crewmateBox" layoutX="23.0" layoutY="460.0" prefWidth="150.0" />
-		<Label layoutX="278.0" layoutY="348.0" text="Start Date">
+      <Label layoutX="226.0" layoutY="349.0" text="Action Type">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="actionTypeBox" layoutX="202.0" layoutY="380.0" prefWidth="150.0" />
+		<Label layoutX="384.0" layoutY="361.0" text="Start Date">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<DatePicker fx:id="startDatePicker" layoutX="278.0" layoutY="373.0" />
-      <Spinner fx:id="startHourSpinner" layoutX="278.0" layoutY="426.0" prefHeight="25.0" prefWidth="78.0" />
-      <Spinner fx:id="startMinuteSpinner" layoutX="366.0" layoutY="426.0" prefHeight="25.0" prefWidth="78.0" />
-		<Label layoutX="278.0" layoutY="460.0" text="End Date">
+		<DatePicker fx:id="startDatePicker" layoutX="384.0" layoutY="386.0" />
+      <Spinner fx:id="startHourSpinner" layoutX="384.0" layoutY="439.0" prefHeight="25.0" prefWidth="78.0" />
+      <Spinner fx:id="startMinuteSpinner" layoutX="472.0" layoutY="439.0" prefHeight="25.0" prefWidth="78.0" />
+		<Label layoutX="384.0" layoutY="473.0" text="End Date">
 			<font>
 				<Font size="16.0" />
 			</font>
 		</Label>
-		<DatePicker fx:id="endDatePicker" layoutX="278.0" layoutY="485.0" />
+		<DatePicker fx:id="endDatePicker" layoutX="384.0" layoutY="498.0" />
 		<Button fx:id="applyFiltersButton" layoutX="23.0" layoutY="538.0" mnemonicParsing="false" onAction="#handleApplyFilters" text="Filter">
 			<font>
 				<Font size="16.0" />
@@ -63,24 +69,24 @@
 				<Font size="16.0" />
 			</font>
 		</Button>
-      <Spinner fx:id="endHourSpinner" layoutX="278.0" layoutY="539.0" prefHeight="25.0" prefWidth="78.0" />
-      <Spinner fx:id="endMinuteSpinner" layoutX="366.0" layoutY="539.0" prefHeight="25.0" prefWidth="78.0" />
-      <Label alignment="CENTER" layoutX="278.0" layoutY="402.0" prefHeight="25.0" prefWidth="61.0" text="Hour">
+      <Spinner fx:id="endHourSpinner" layoutX="384.0" layoutY="552.0" prefHeight="25.0" prefWidth="78.0" />
+      <Spinner fx:id="endMinuteSpinner" layoutX="472.0" layoutY="552.0" prefHeight="25.0" prefWidth="78.0" />
+      <Label alignment="CENTER" layoutX="384.0" layoutY="415.0" prefHeight="25.0" prefWidth="61.0" text="Hour">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="366.0" layoutY="402.0" prefHeight="25.0" prefWidth="78.0" text="Minutes">
+      <Label alignment="CENTER" layoutX="472.0" layoutY="415.0" prefHeight="25.0" prefWidth="78.0" text="Minutes">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="278.0" layoutY="510.0" prefHeight="25.0" prefWidth="61.0" text="Hour">
+      <Label alignment="CENTER" layoutX="384.0" layoutY="523.0" prefHeight="25.0" prefWidth="61.0" text="Hour">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="366.0" layoutY="510.0" prefHeight="25.0" prefWidth="78.0" text="Minutes">
+      <Label alignment="CENTER" layoutX="472.0" layoutY="523.0" prefHeight="25.0" prefWidth="78.0" text="Minutes">
          <font>
             <Font size="16.0" />
          </font>

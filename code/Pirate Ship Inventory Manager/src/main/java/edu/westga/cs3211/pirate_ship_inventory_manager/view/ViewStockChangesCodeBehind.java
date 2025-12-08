@@ -2,6 +2,7 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.view;
 
 import java.io.IOException;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
@@ -41,6 +42,9 @@ public class ViewStockChangesCodeBehind {
 	@FXML
 	private ComboBox<SpecialQuality> specialQualityBox;
 
+	@FXML
+
+	private ComboBox<ActionType> actionTypeBox;
 	@FXML
 	private DatePicker startDatePicker;
 
@@ -95,6 +99,10 @@ public class ViewStockChangesCodeBehind {
 		this.endMinuteSpinner.getValueFactory().valueProperty()
 				.bindBidirectional(this.viewModel.endMinuteProperty().asObject());
 
+		this.actionTypeBox.getItems().add(null);
+		this.actionTypeBox.getItems().addAll(ActionType.values());
+		this.actionTypeBox.valueProperty().bindBidirectional(this.viewModel.getSelectedActionType());
+
 	}
 
 	@FXML
@@ -127,6 +135,7 @@ public class ViewStockChangesCodeBehind {
 	private void handleResetFilters(ActionEvent event) {
 		this.specialQualityBox.setValue(null);
 		this.crewmateBox.setValue(null);
+		this.actionTypeBox.setValue(null);
 		this.startDatePicker.setValue(null);
 		this.endDatePicker.setValue(null);
 
