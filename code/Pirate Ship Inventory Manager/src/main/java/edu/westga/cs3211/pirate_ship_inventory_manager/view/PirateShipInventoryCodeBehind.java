@@ -78,7 +78,7 @@ public class PirateShipInventoryCodeBehind {
 	}
 	
     @FXML
-    private void hanldleViewInventory() {
+    private void handleViewInventory() {
     	try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewInventoryPage.fxml"));
 			Parent addStockpage = loader.load();

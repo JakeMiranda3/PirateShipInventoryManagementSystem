@@ -108,8 +108,8 @@ public class StockChange {
 	public String toString() {
 		DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		String formattedTime = this.timeAdded.format(formatTime);
-		return this.user.getName() + " " + this.actionType.name().toLowerCase() + " " + this.stock.getQuantity() + " " + this.stock.getName() + " at "
-				+ formattedTime;
+		return this.user.getName() + " " + this.actionType.name().toLowerCase() + " " + this.stock.getQuantity() + " "
+				+ this.stock.getName() + " at " + formattedTime;
 	}
 
 }
