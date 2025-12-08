@@ -80,19 +80,16 @@ class TestViewInventoryViewModel {
 
 		ViewInventoryViewModel viewModel = new ViewInventoryViewModel();
 
-		// Test 1: Filter by Flammable Compartment
 		viewModel.getSelectedCompartmentProperty().set("Flammable Compartment");
 		viewModel.applyFilters();
 		assertEquals(1, viewModel.getFilteredStock().size());
 		assertEquals("Gas", viewModel.getFilteredStock().get(0).getName());
 
-		// Test 2: Filter by Liquid Compartment
 		viewModel.getSelectedCompartmentProperty().set("Liquid Compartment");
 		viewModel.applyFilters();
 		assertEquals(1, viewModel.getFilteredStock().size());
 		assertEquals("Water", viewModel.getFilteredStock().get(0).getName());
 
-		// Test 3: Filter by non-existent compartment
 		viewModel.getSelectedCompartmentProperty().set("Non-Existent");
 		viewModel.applyFilters();
 		assertEquals(0, viewModel.getFilteredStock().size());
@@ -114,7 +111,6 @@ class TestViewInventoryViewModel {
 
 		ViewInventoryViewModel viewModel = new ViewInventoryViewModel();
 
-		// Filter by FLAMMABLE quality AND Flammable Compartment
 		viewModel.getSelectedQualityProperty().set(SpecialQuality.FLAMMABLE);
 		viewModel.getSelectedCompartmentProperty().set("Flammable Compartment");
 		viewModel.applyFilters();
@@ -155,14 +151,75 @@ class TestViewInventoryViewModel {
 
 		ViewInventoryViewModel viewModel = new ViewInventoryViewModel();
 
-		// Apply filters with null values (should show all)
 		viewModel.applyFilters();
 		assertEquals(1, viewModel.getFilteredStock().size());
 
-		// Set to null and apply again
 		viewModel.getSelectedQualityProperty().set(null);
 		viewModel.getSelectedCompartmentProperty().set(null);
 		viewModel.applyFilters();
 		assertEquals(1, viewModel.getFilteredStock().size());
+	}
+	
+	@Test
+	void testFilterByStockTypeFood() {
+	    Inventory inventory = Session.getInventory();
+	    Compartment noneCompartment = inventory.getCompartments().get(0); // NONE compartment
+	    
+	    Stock foodStock = new Stock("Bread", 3, Condition.PERFECT, 
+	                               EnumSet.of(SpecialQuality.NONE), null, StockType.FOOD);
+	    Stock otherStock = new Stock("Tools", 5, Condition.PERFECT, 
+	                                EnumSet.of(SpecialQuality.NONE), null, StockType.OTHER);
+	    
+	    noneCompartment.addStock(foodStock);
+	    noneCompartment.addStock(otherStock);
+	    
+	    ViewInventoryViewModel viewModel = new ViewInventoryViewModel();
+	    
+	    viewModel.getSelectedStockTypeProperty().set(StockType.FOOD);
+	    viewModel.applyFilters();
+	    
+	    assertEquals(1, viewModel.getFilteredStock().size());
+	    assertEquals("Bread", viewModel.getFilteredStock().get(0).getName());
+	}
+
+	@Test
+	void testFilterByStockTypeOther() {
+	    Inventory inventory = Session.getInventory();
+	    Compartment noneCompartment = inventory.getCompartments().get(0); 
+	    
+	    Stock foodStock = new Stock("Bread", 3, Condition.PERFECT, 
+	                               EnumSet.of(SpecialQuality.NONE), null, StockType.FOOD);
+	    Stock otherStock = new Stock("Tools", 5, Condition.PERFECT, 
+	                                EnumSet.of(SpecialQuality.NONE), null, StockType.OTHER);
+	    
+	    noneCompartment.addStock(foodStock);
+	    noneCompartment.addStock(otherStock);
+	    
+	    ViewInventoryViewModel viewModel = new ViewInventoryViewModel();
+	    
+	    viewModel.getSelectedStockTypeProperty().set(StockType.OTHER);
+	    viewModel.applyFilters();
+	    
+	    assertEquals(1, viewModel.getFilteredStock().size());
+	    assertEquals("Tools", viewModel.getFilteredStock().get(0).getName());
+	}
+
+	@Test
+	void testClearFiltersResetsStockType() {
+	    Inventory inventory = Session.getInventory();
+	    Compartment flammableCompartment = inventory.getCompartments().get(1); 
+
+	    Stock stock = new Stock("Gas", 3, Condition.PERFECT, 
+	                           EnumSet.of(SpecialQuality.FLAMMABLE), null, StockType.OTHER);
+	    flammableCompartment.addStock(stock);
+	    
+	    ViewInventoryViewModel viewModel = new ViewInventoryViewModel();
+	    
+	    viewModel.getSelectedStockTypeProperty().set(StockType.OTHER);
+	    viewModel.applyFilters();
+	    viewModel.clearFilters();
+	    
+	    assertEquals(1, viewModel.getFilteredStock().size());
+	    assertNull(viewModel.getSelectedStockTypeProperty().get());
 	}
 }

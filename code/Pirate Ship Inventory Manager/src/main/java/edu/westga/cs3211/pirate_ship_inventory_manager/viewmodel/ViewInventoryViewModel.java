@@ -7,6 +7,7 @@ import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -32,6 +33,8 @@ public class ViewInventoryViewModel {
     /** The selected compartment. */
     private ObjectProperty<String> selectedCompartment;
 
+	private ObjectProperty<StockType> selectedStockType;
+
     /**
      * Instantiates a new view inventory view model.
      */
@@ -40,6 +43,7 @@ public class ViewInventoryViewModel {
         this.filteredStock = FXCollections.observableArrayList(this.inventory.getStockItems());
         this.selectedQuality = new SimpleObjectProperty<>(null);
         this.selectedCompartment = new SimpleObjectProperty<>(null);
+        this.selectedStockType = new SimpleObjectProperty<>(null);
     }
 
     /**
@@ -68,7 +72,16 @@ public class ViewInventoryViewModel {
     public ObjectProperty<String> getSelectedCompartmentProperty() {
         return this.selectedCompartment;
     }
-
+    
+    /**
+     * Gets the selected stock type property. 
+     *
+     * @return the selected stock type property
+     */
+    public ObjectProperty<StockType> getSelectedStockTypeProperty() {
+        return this.selectedStockType;
+    }
+    
     /**
      * Apply filters.
      */
@@ -94,6 +107,13 @@ public class ViewInventoryViewModel {
         	            })
         	            .collect(Collectors.toList());
         }
+        
+        if (this.selectedStockType.get() != null) {
+            StockType stockType = this.selectedStockType.get();
+            filtered = filtered.stream()
+                    .filter(stock -> stock.getStockType().equals(stockType))
+                    .collect(Collectors.toList());
+        }
 
         this.filteredStock.setAll(filtered);
     }
@@ -104,6 +124,7 @@ public class ViewInventoryViewModel {
     public void clearFilters() {
         this.selectedQuality.set(null);
         this.selectedCompartment.set(null);
+        this.selectedStockType.set(null);
         this.filteredStock.setAll(this.inventory.getStockItems());
     }
 }
