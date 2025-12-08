@@ -125,7 +125,6 @@ public class AddStockCodeBehind {
 
 		selectedCompartment.addStock(stock);
 		Session.getInventory().addStockChange(new StockChange(stock, Session.getCurrentUser()));
-
 		int index = this.compartmentBox.getItems().indexOf(selectedCompartment);
 		this.compartmentBox.getItems().set(index, selectedCompartment);
 		new Alert(Alert.AlertType.INFORMATION, "Stock added successfully!").showAndWait();

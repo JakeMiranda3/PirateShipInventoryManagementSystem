@@ -96,8 +96,9 @@ public class LoginViewModel {
 			Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 			specialQualities.add(SpecialQuality.NONE);
 			Stock gold = new Stock("Gold", 5, Condition.PERFECT, specialQualities, null, StockType.OTHER);
+			Session.getInventory().getCompartments().get(0).addStock(gold);
 			Session.getInventory().addStockChange(new StockChange(gold, jackSparrow));
-
+			
 			return true;
 		} else {
 			this.errorMessageProperty.set("Invalid username or password");
