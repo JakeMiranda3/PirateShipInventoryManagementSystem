@@ -77,7 +77,6 @@ public class PirateShipInventoryCodeBehind {
 		}
 	}
 	
-
     @FXML
     private void hanldleViewInventory() {
     	try {
