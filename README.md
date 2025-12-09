@@ -8,4 +8,6 @@ Crewmate - "John", "Doe"
 
 Quartermaster - "Jane", "Doe"
 
+Chef - "Matt" , "Doe"
+
 Becareful for Jack Sparrow, he already has some gold stored away so you can see how the filtering between crewmates work.
