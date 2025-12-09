@@ -5,8 +5,8 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * Main Application class.

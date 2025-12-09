@@ -106,6 +106,27 @@ public class TestLoginViewModel {
 		assertEquals(4, Session.getInventory().getCompartments().size(),
 				"Ensures current session has the default 4 compartments in inventory");
 
+	}@Test
+	public void testTryLoginSucceedsWithValidChefCredentials() {
+		LoginViewModel viewModel = new LoginViewModel();
+
+		viewModel.nameProperty().set("Matt");
+		viewModel.passwordProperty().set("Doe");
+
+		boolean result = viewModel.tryLogin();
+
+		assertTrue(result, "Checks if user is authenticated when trying to login");
+		assertEquals("", viewModel.errorMessageProperty().get(), "Checks error message property");
+		assertNotNull(Session.getCurrentUser(), "Checks the status of the user object");
+		assertEquals("Matt", Session.getCurrentUser().getName(), "Checks the name of the user");
+		assertEquals(2, Session.getCurrentUser().getRoles().size(), "Checks the amount of roles the user has");
+		assertTrue(Session.getCurrentUser().getRoles().contains(Role.CREWMATE),
+				"Checks if the user has the crewmate role");
+		assertTrue(Session.getCurrentUser().getRoles().contains(Role.CHEF),
+				"Checks if the user has Chef role");
+		assertEquals(4, Session.getInventory().getCompartments().size(),
+				"Ensures current session has the default 4 compartments in inventory");
+
 	}
 
 	@Test

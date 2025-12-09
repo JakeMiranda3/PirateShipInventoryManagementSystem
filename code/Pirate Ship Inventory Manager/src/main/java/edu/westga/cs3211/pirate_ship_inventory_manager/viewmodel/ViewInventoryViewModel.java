@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
-import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
-import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 
 /**
  * The Class ViewInventoryViewModel.

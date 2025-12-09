@@ -1,12 +1,10 @@
 package edu.westga.cs3211.pirate_ship_inventory_manager.view;
 
 import java.io.IOException;
-
 import edu.westga.cs3211.pirate_ship_inventory_manager.Main;
 import edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel.LoginViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 

@@ -21,6 +21,16 @@ public class TestPirateShipInventoryViewModel {
 		
 		assertTrue(viewModel.isQuarterMasterProperty().get(), "Checks if user has the Quartermaster role");
 	}
+	@Test
+	public void testUserWithChefRole() {
+		User jane = new User("Jane", "Doe");
+		jane.addRole(Role.CHEF);
+		Session.setCurrentuser(jane);
+		
+		PirateShipInventoryViewModel viewModel = new PirateShipInventoryViewModel();
+		
+		assertTrue(viewModel.isChefProperty().get(), "Checks if user has the Chef role");
+	}
 	
 	@Test
 	public void testUserWithoutQuarterMasterRole() {

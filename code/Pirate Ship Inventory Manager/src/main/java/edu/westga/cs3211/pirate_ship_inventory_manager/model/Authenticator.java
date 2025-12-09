@@ -22,10 +22,13 @@ public class Authenticator {
 
 		User validUser1 = new User("John", "Doe");
 		User validUser2 = new User("Jane", "Doe");
+		User validUser3 = new User("Matt", "Doe");
 		validUser2.addRole(Role.QUARTERMASTER);
+		validUser3.addRole(Role.CHEF);
 
 		this.credentialSet.add(validUser1);
 		this.credentialSet.add(validUser2);
+		this.credentialSet.add(validUser3);
 	}
 
 	/**

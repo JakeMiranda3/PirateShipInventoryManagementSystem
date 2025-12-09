@@ -100,6 +100,10 @@ public class LoginViewModel {
 			Session.getInventory().getCompartments().get(0).addStock(gold);
 			Session.getInventory().addStockChange(new StockChange(gold, jackSparrow, ActionType.ADDED));
 			
+		Stock bread = new Stock("Bread", 30, Condition.USABLE, specialQualities, null, StockType.FOOD);
+		Session.getInventory().getCompartments().get(0).addStock(bread);
+		Session.getInventory().addStockChange(new StockChange(bread, jackSparrow, ActionType.ADDED));
+			
 			return true;
 		} else {
 			this.errorMessageProperty.set("Invalid username or password");

@@ -30,7 +30,9 @@ public class PirateShipInventoryCodeBehind {
 	
     @FXML
     private Button viewInventory;
-
+    
+    @FXML
+    private Button viewPantry;
 	private PirateShipInventoryViewModel viewModel;
 
 	/**
@@ -44,8 +46,24 @@ public class PirateShipInventoryCodeBehind {
 	private void initialize() {
 		this.viewStockChanges.visibleProperty().bind(this.viewModel.isQuarterMasterProperty());
 		this.viewInventory.visibleProperty().bind(this.viewModel.isQuarterMasterProperty());
+		this.viewPantry.visibleProperty().bind(this.viewModel.isChefProperty());
 	}
+	
+	@FXML
+	private void handleViewPantry() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewPantryPage.fxml"));
+			Parent addStockpage = loader.load();
+			Scene scene = new Scene(addStockpage);
 
+			Stage stage = (Stage) this.rootPane.getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException error) {
+			error.printStackTrace();
+		}
+	}
+	
 	@FXML
 	private void handleViewStockChanges() {
 		try {

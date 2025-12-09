@@ -14,12 +14,15 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class PirateShipInventoryViewModel {
 
 	private BooleanProperty quarterMaster;
+	private BooleanProperty chef;
 
 	/**
 	 * Instantiates a new pirate ship inventory view model.
 	 */
 	public PirateShipInventoryViewModel() {
 		boolean isQuarterMaster = Session.getCurrentUser().getRoles().contains(Role.QUARTERMASTER);
+		boolean isChef = Session.getCurrentUser().getRoles().contains(Role.CHEF);
+		this.chef = new SimpleBooleanProperty(isChef);
 		this.quarterMaster = new SimpleBooleanProperty(isQuarterMaster);
 	}
 
@@ -30,6 +33,15 @@ public class PirateShipInventoryViewModel {
 	 */
 	public BooleanProperty isQuarterMasterProperty() {
 		return this.quarterMaster;
+	}
+	
+	/**
+	 * Checks if is chef property.
+	 *
+	 * @return the boolean property
+	 */
+	public BooleanProperty isChefProperty() {
+		return this.chef;
 	}
 
 }
