@@ -23,7 +23,7 @@ import javafx.collections.ObservableList;
  * @version 1.0
  */
 public class ViewPantryViewModel {
-
+	
 	private Inventory inventory;
 	private ObservableList<Stock> filteredStock;
 
@@ -102,7 +102,7 @@ public class ViewPantryViewModel {
 		}
 
 		String text = this.searchText.get();
-		if (text != null && !text.isBlank()) {
+		if (!text.isBlank()) {
 			String lower = text.toLowerCase();
 			filtered = filtered.stream().filter(s -> s.getName().toLowerCase().contains(lower))
 					.collect(Collectors.toList());

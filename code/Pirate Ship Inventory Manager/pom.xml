@@ -89,5 +89,29 @@
 			
         </plugins>
         </pluginManagement>
+        <!-- Added plugins block so checkstyle runs during the build -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <!-- Use the UWG rules file provided by the user -->
+                    <configLocation>https://www.westga.edu/~astanesc/CS1302_data/checkstyle/UWG_checks.xml</configLocation>
+                   
+                    <consoleOutput>true</consoleOutput>
+                    <failOnViolation>true</failOnViolation>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>checkstyle-validation</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
