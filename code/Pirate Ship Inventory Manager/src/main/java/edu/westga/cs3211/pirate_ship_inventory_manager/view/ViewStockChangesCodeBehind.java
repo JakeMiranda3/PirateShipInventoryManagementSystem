@@ -2,6 +2,7 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.view;
 
 import java.io.IOException;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
@@ -16,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -40,10 +43,22 @@ public class ViewStockChangesCodeBehind {
 	private ComboBox<SpecialQuality> specialQualityBox;
 
 	@FXML
+
+	private ComboBox<ActionType> actionTypeBox;
+	@FXML
 	private DatePicker startDatePicker;
 
 	@FXML
 	private ListView<StockChange> stockChangesList;
+
+	@FXML
+	private Spinner<Integer> startHourSpinner;
+	@FXML
+	private Spinner<Integer> startMinuteSpinner;
+	@FXML
+	private Spinner<Integer> endHourSpinner;
+	@FXML
+	private Spinner<Integer> endMinuteSpinner;
 
 	private ViewStockChangesViewModel viewModel;
 
@@ -56,6 +71,10 @@ public class ViewStockChangesCodeBehind {
 
 	@FXML
 	private void initialize() {
+		this.startHourSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
+		this.startMinuteSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+		this.endHourSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 23));
+		this.endMinuteSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 59));
 		this.stockChangesList.setItems(this.viewModel.getFilteredChangesProperty());
 
 		this.specialQualityBox.getItems().add(null);
@@ -67,16 +86,34 @@ public class ViewStockChangesCodeBehind {
 		this.crewmateBox.getItems().addAll(Session.getInventory().getUsersWhoMadeChanges());
 
 		this.crewmateBox.valueProperty().bindBidirectional(this.viewModel.getSelectedCrewmateProperty());
+
 		this.startDatePicker.valueProperty().bindBidirectional(this.viewModel.startDateProperty());
 		this.endDatePicker.valueProperty().bindBidirectional(this.viewModel.endDateProperty());
+
+		this.startHourSpinner.getValueFactory().valueProperty()
+				.bindBidirectional(this.viewModel.startHourProperty().asObject());
+		this.startMinuteSpinner.getValueFactory().valueProperty()
+				.bindBidirectional(this.viewModel.startMinuteProperty().asObject());
+		this.endHourSpinner.getValueFactory().valueProperty()
+				.bindBidirectional(this.viewModel.endHourProperty().asObject());
+		this.endMinuteSpinner.getValueFactory().valueProperty()
+				.bindBidirectional(this.viewModel.endMinuteProperty().asObject());
+
+		this.actionTypeBox.getItems().add(null);
+		this.actionTypeBox.getItems().addAll(ActionType.values());
+		this.actionTypeBox.valueProperty().bindBidirectional(this.viewModel.getSelectedActionType());
+
 	}
 
 	@FXML
 	private void handleApplyFilters(ActionEvent event) {
 		try {
 			this.viewModel.applyFilters();
+			this.stockChangesList.refresh();
 		} catch (IllegalArgumentException error) {
 			new Alert(Alert.AlertType.ERROR, error.getMessage()).showAndWait();
+		} catch (Exception error) {
+			new Alert(Alert.AlertType.ERROR, "An unexpected error occured, please try again").showAndWait();
 		}
 
 	}
@@ -96,11 +133,19 @@ public class ViewStockChangesCodeBehind {
 
 	@FXML
 	private void handleResetFilters(ActionEvent event) {
-		this.viewModel.clearFilters();
 		this.specialQualityBox.setValue(null);
 		this.crewmateBox.setValue(null);
+		this.actionTypeBox.setValue(null);
 		this.startDatePicker.setValue(null);
 		this.endDatePicker.setValue(null);
+
+		this.startHourSpinner.getValueFactory().setValue(0);
+		this.startMinuteSpinner.getValueFactory().setValue(0);
+		this.endHourSpinner.getValueFactory().setValue(23);
+		this.endMinuteSpinner.getValueFactory().setValue(59);
+
+		this.viewModel.clearFilters();
+		this.stockChangesList.refresh();
 	}
 
 }

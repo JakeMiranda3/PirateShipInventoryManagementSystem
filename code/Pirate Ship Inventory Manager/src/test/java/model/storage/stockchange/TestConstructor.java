@@ -8,8 +8,10 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Stock;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.StockChange;
@@ -20,7 +22,7 @@ public class TestConstructor {
 	public void testWhenStockIsNull() {
 		User user = new User("John", "Doe");
 		assertThrows(IllegalArgumentException.class, () -> {
-			new StockChange(null, user);
+			new StockChange(null, user, ActionType.ADDED);
 
 		});
 	}
@@ -30,27 +32,61 @@ public class TestConstructor {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.PERISHABLE);
 		LocalDate date = LocalDate.parse("2025-11-16");
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			new StockChange(stockItem, null);
+			new StockChange(stockItem, null, ActionType.ADDED);
+
+		});
+	}
+	
+	@Test
+	public void testWhenActionTypeIsNull() {
+		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
+		specialQualities.add(SpecialQuality.PERISHABLE);
+		LocalDate date = LocalDate.parse("2025-11-16");
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
+		User user = new User("John", "Doe");
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			new StockChange(stockItem, user, (ActionType) null);
 
 		});
 	}
 
 	@Test
-	public void testValidConstructor() {
+	public void testValidAddConstructor() {
 		User user = new User("John", "Doe");
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.PERISHABLE);
 		LocalDate date = LocalDate.parse("2025-11-16");
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
 
-		StockChange stockChange = new StockChange(stockItem, user);
+		StockChange stockChange = new StockChange(stockItem, user, ActionType.ADDED);
 
 		assertEquals(stockItem, stockChange.getStock(), "Checks if stock was added correctly");
 		assertEquals(user, stockChange.getUser(), "Checks if user was added correctly");
+		assertEquals(ActionType.ADDED, stockChange.getTypeOfStockChange(), "Checks the users action");
 		assertNotNull(stockChange.getTimeAdded(), "Ensures time added exist");
+		
+
+	}
+	
+	@Test
+	public void testValidRemoveConstructor() {
+		User user = new User("John", "Doe");
+		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
+		specialQualities.add(SpecialQuality.PERISHABLE);
+		LocalDate date = LocalDate.parse("2025-11-16");
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
+
+		StockChange stockChange = new StockChange(stockItem, user, ActionType.REMOVED);
+
+		assertEquals(stockItem, stockChange.getStock(), "Checks if stock was added correctly");
+		assertEquals(user, stockChange.getUser(), "Checks if user was added correctly");
+		assertEquals(ActionType.REMOVED, stockChange.getTypeOfStockChange(), "Checks the users action");
+		assertNotNull(stockChange.getTimeAdded(), "Ensures time added exist");
+		
 
 	}
 

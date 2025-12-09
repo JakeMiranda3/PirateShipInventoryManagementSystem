@@ -1,0 +1,31 @@
+Pantry
+Context: Quartermaster or Cook is logged in.
+
+Primary Flow
+1. User indicates they want to view all food items in the inventory.
+2. System retrieves all stock entries categorized as food.
+3. System presents the user with a list of food items, including: 
+	a.Name
+	b.Quantity
+	c.Condition (perfect, usable, unusable)
+	d.Special qualities (flammable, liquid, perishable)
+	e.Expiration date (if perishable)
+4. User reviews the list of seafood items.
+
+Alternative Flows
+Filter food by Condition
+	A3. User selects one or more conditions (perfect, usable, unusable).
+	A4. System removes all food items from the list that do not match the selected condition(s).
+	A5. Return to primary flow step 4.
+Filter food by Special Quality
+	A3. User selects one or more special qualities (flammable, liquid, perishable).
+	A4. System removes all food items from the list that do not match the selected qualities.
+	A5. Return to primary flow step 4.
+Filter food by Expiration Date
+	A3. User selects a valid date range (start and/or end where end is after start if provided).
+	A4. System removes all food items from the list that do not fall within the selected expiration date range.
+	A5. Return to primary flow step 4.
+Invalid Expiration Date Range
+	A3. User selects a date range where end date is before or equal to start date.
+	A4. System notifies user that date range is invalid; end date must be after start date.
+	A5. Return to alternative flow step A3 with prior provided start and end date prefilled.

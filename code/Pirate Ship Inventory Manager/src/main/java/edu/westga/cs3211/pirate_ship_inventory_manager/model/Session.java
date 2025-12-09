@@ -17,6 +17,14 @@ public final class Session {
 	}
 
 	/**
+	 * Clears current sessions state
+	 */
+	public static void clearSession() {
+		currentUser = null;
+		currentInventory = null;
+	}
+
+	/**
 	 * Sets the Current User.
 	 *
 	 * @param user the new currentUser

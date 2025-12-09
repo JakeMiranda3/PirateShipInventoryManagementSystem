@@ -3,8 +3,10 @@ package edu.westga.cs3211.pirate_ship_inventory_manager.viewmodel;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Authenticator;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
@@ -94,9 +96,10 @@ public class LoginViewModel {
 			User jackSparrow = new User("Jack Sparrow", "password");
 			Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 			specialQualities.add(SpecialQuality.NONE);
-			Stock gold = new Stock("Gold", 5, Condition.PERFECT, specialQualities, null);
-			Session.getInventory().addStockChange(new StockChange(gold, jackSparrow));
-
+			Stock gold = new Stock("Gold", 5, Condition.PERFECT, specialQualities, null, StockType.OTHER);
+			Session.getInventory().getCompartments().get(0).addStock(gold);
+			Session.getInventory().addStockChange(new StockChange(gold, jackSparrow, ActionType.ADDED));
+			
 			return true;
 		} else {
 			this.errorMessageProperty.set("Invalid username or password");

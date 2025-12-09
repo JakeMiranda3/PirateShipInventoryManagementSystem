@@ -9,8 +9,10 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.ActionType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.Session;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.User;
 import edu.westga.cs3211.pirate_ship_inventory_manager.model.storage.Inventory;
@@ -29,10 +31,10 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(flammable, user2));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(flammable, user2, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 
@@ -54,11 +56,11 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual2 = new HashSet<SpecialQuality>();
 		specialQual2.add(SpecialQuality.LIQUID);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null);
-		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
+		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(liquid, user));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(liquid, user, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 
@@ -79,10 +81,10 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(flammable, user2));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(flammable, user2, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 		viewModel.getSelectedCrewmateProperty().set(user);
@@ -92,6 +94,32 @@ class TestViewStockChangesViewModel {
 				"Ensures after filters that the specific crewmate shows up");
 		assertEquals("John", viewModel.getFilteredChangesProperty().get(0).getUser().getName(),
 				"Ensures after the filters that the specific crewmate matches the name");
+
+	}
+	
+	@Test
+	public void testFilterBySpecificAction() {
+		Session.setInventory(new Inventory());
+
+		User user = new User("John", "Doe");
+		User user2 = new User("Jane", "Doe");
+		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
+		specialQual1.add(SpecialQuality.FLAMMABLE);
+
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
+
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(flammable, user2, ActionType.REMOVED));
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+		viewModel.getSelectedActionType().set(ActionType.ADDED);
+		viewModel.applyFilters();
+
+		assertEquals(1, viewModel.getFilteredChangesProperty().size(),
+				"Ensures after filters that the specific crewmate shows up");
+		assertEquals("John", viewModel.getFilteredChangesProperty().get(0).getUser().getName(),
+				"Ensures after the filters that the specific crewmate shows up");
+		assertEquals(ActionType.ADDED, viewModel.getFilteredChangesProperty().get(0).getTypeOfStockChange());
 
 	}
 
@@ -110,7 +138,7 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQualities = new HashSet<SpecialQuality>();
 		specialQualities.add(SpecialQuality.PERISHABLE);
 		LocalDate date = LocalDate.parse("2025-11-16");
-		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date);
+		Stock stockItem = new Stock("Gold", 30, Condition.UNUSABLE, specialQualities, date, StockType.OTHER);
 		LocalDateTime currentDay = LocalDateTime.now();
 
 		assertThrows(IllegalArgumentException.class, () -> {
@@ -127,7 +155,7 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
 		LocalDateTime currentDay = LocalDateTime.now();
 		StockChange change1 = new StockChange(flammable, user, yesterday);
@@ -155,7 +183,7 @@ class TestViewStockChangesViewModel {
 		User user = new User("John", "Doe");
 		Set<SpecialQuality> specialQual1 = new HashSet<SpecialQuality>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
 		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
 		LocalDateTime currentDay = LocalDateTime.now();
@@ -195,13 +223,27 @@ class TestViewStockChangesViewModel {
 	}
 
 	@Test
-	public void TestvalidDateRange() {
+	public void testTimeWithoutDateThrowsException() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+		viewModel.endHourProperty().set(6);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testValidDateRange() {
 		Session.setInventory(new Inventory());
 
 		User user = new User("John", "Doe");
 		Set<SpecialQuality> specialQual1 = new HashSet<>();
 		specialQual1.add(SpecialQuality.FLAMMABLE);
-		Stock stock = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null);
+		Stock stock = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
 
 		StockChange stockChange1 = new StockChange(stock, user, LocalDateTime.now().minusDays(3));
 		StockChange stockChange2 = new StockChange(stock, user, LocalDateTime.now());
@@ -213,6 +255,7 @@ class TestViewStockChangesViewModel {
 
 		viewModel.startDateProperty().set(LocalDate.now().minusDays(5));
 		viewModel.endDateProperty().set(LocalDate.now());
+
 		viewModel.applyFilters();
 
 		assertEquals(2, viewModel.getFilteredChangesProperty().size(), "Valid date range");
@@ -229,11 +272,11 @@ class TestViewStockChangesViewModel {
 		Set<SpecialQuality> specialQual2 = new HashSet<SpecialQuality>();
 		specialQual2.add(SpecialQuality.LIQUID);
 
-		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null);
-		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null);
+		Stock flammable = new Stock("Gas", 10, Condition.PERFECT, specialQual1, null, StockType.OTHER);
+		Stock liquid = new Stock("Water", 5, Condition.PERFECT, specialQual2, null, StockType.OTHER);
 
-		Session.getInventory().addStockChange(new StockChange(flammable, user));
-		Session.getInventory().addStockChange(new StockChange(liquid, user));
+		Session.getInventory().addStockChange(new StockChange(flammable, user, ActionType.ADDED));
+		Session.getInventory().addStockChange(new StockChange(liquid, user, ActionType.ADDED));
 
 		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
 
@@ -248,6 +291,122 @@ class TestViewStockChangesViewModel {
 		assertNull(viewModel.getSelectedCrewmateProperty().get(), "Checks the value of selected crewmate");
 		assertNull(viewModel.startDateProperty().get(), "Checks the value of selected start date");
 		assertNull(viewModel.endDateProperty().get(), "Checks the value of selected end date");
+		assertEquals(0, viewModel.startMinuteProperty().get(), "Checks the start minute value");
+		assertEquals(0, viewModel.startHourProperty().get(), "Checks the start hour value");
+		assertEquals(59, viewModel.endMinuteProperty().get(), "Checks the end minute value");
+		assertEquals(23, viewModel.endHourProperty().get(), "Checks the end hour value");
+		assertNull(viewModel.getSelectedActionType().get(), "Checks the value of selected action type");
+	}
+
+	@Test
+	public void testAllTimeFieldsDefault() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(0);
+		viewModel.startMinuteProperty().set(0);
+		viewModel.endHourProperty().set(23);
+		viewModel.endMinuteProperty().set(59);
+
+		assertDoesNotThrow(() -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testOneTimeFieldModified() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testMultipleTimeFieldsModified() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+		viewModel.endMinuteProperty().set(30);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testAllTimeFieldsModified() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(5);
+		viewModel.startMinuteProperty().set(30);
+		viewModel.endHourProperty().set(22);
+		viewModel.endMinuteProperty().set(45);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForStartMinuteTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startMinuteProperty().set(1);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForEndMinuteTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.endMinuteProperty().set(58);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForStartHourTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.startHourProperty().set(1);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
+	}
+
+	@Test
+	public void testEdgeCaseForEndHourTime() {
+		Session.setInventory(new Inventory());
+
+		ViewStockChangesViewModel viewModel = new ViewStockChangesViewModel();
+
+		viewModel.endHourProperty().set(22);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			viewModel.applyFilters();
+		});
 	}
 
 }

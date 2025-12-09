@@ -6,6 +6,7 @@ import java.util.Set;
 
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.Condition;
 import edu.westga.cs3211.pirate_ship_inventory_manager.enums.SpecialQuality;
+import edu.westga.cs3211.pirate_ship_inventory_manager.enums.StockType;
 
 /**
  * Defines a Stock item for the pirate ship
@@ -21,6 +22,7 @@ public class Stock {
 	private Set<SpecialQuality> qualities;
 	private LocalDate expirationDate;
 	private LocalDateTime addedOn;
+	private StockType stockType;
 
 	/**
 	 * Creates a new stock item with name, quantity, condition, special qualities,
@@ -41,9 +43,10 @@ public class Stock {
 	 * @param qualities      set of special qualities (flammable, liquid,
 	 *                       perishable)
 	 * @param expirationDate expiration date if stock is perishable; otherwise null
+	 * @param stockType      stockType to decide what the stockType
 	 */
 	public Stock(String name, int quantity, Condition condition, Set<SpecialQuality> qualities,
-			LocalDate expirationDate) {
+			LocalDate expirationDate, StockType stockType) {
 
 		if (name == null || name.isBlank()) {
 			throw new IllegalArgumentException("Stock name is invalid.");
@@ -69,12 +72,17 @@ public class Stock {
 			throw new IllegalArgumentException("Perishable stock must have an expiration date");
 		}
 
+		if (stockType == null) {
+			throw new IllegalArgumentException("A stocktype must be set");
+		}
+
 		this.name = name;
 		this.quantity = quantity;
 		this.condition = condition;
 		this.qualities = qualities;
 		this.expirationDate = expirationDate;
 		this.addedOn = LocalDateTime.now();
+		this.stockType = stockType;
 	}
 
 	/**
@@ -129,6 +137,20 @@ public class Stock {
 	 */
 	public LocalDateTime getAddedOn() {
 		return this.addedOn;
+	}
+	
+	@Override
+	public String toString() {
+	    return this.getName() + " (" + this.getQuantity() + " units) - " + this.getCondition();
+	}
+
+	/**
+	 * Gets the stock type.
+	 *
+	 * @return the stock type
+	 */
+	public StockType getStockType() {
+		return this.stockType;
 	}
 
 }
